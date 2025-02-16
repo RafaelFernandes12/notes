@@ -10,3 +10,9 @@ Run C code
 gcc -o tictactoe tictactoe.c
 ./tictactoe
 ```
+
+Run maven project
+
+```bash
+mvn spring-boot:run
+```
