@@ -32,3 +32,10 @@ sudo lsof -i :<port>
 // kill it
 sudo kill -9 <PID>
 ```
+
+activate boxes
+
+```bash
+sudo modprobe kvm_amd
+```
+
