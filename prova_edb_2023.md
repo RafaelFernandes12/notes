@@ -1,0 +1,9 @@
+01a) Uma colisao é quando o hash de dois elementos diferentes coincidem.
+01b) A sondagem linear resolve o problema de colisao da seguinte forma: quando 2 elementos tem o mesmo hash, assim se inicia uma busca sequencial por uma posicao vazia na tabela. Geralmente a formula para achar esse elemento é algo como (hash+i)%n, onde i é o numero de tentativas e n é o tamanho da tabela.
+01c) O fator carga é o quando a tabela está cheia, por exemplo, numa tabela de 100 elementos, se 60 posicoes estiverem preenchidas o fator carga será de 0,6.
+É importante mantes o fator carga baixo, pois no contexto de sondagem linear, caso o fator carga esteja acima do limite determinado por nós(geralmente algo proximo de 0,7 ou 0.75) a quantidade de colisoes aumentará, o que fará as operacoes de insercao, busca e remocao se aproximarem de O(n) ao inves do ideal que é O(1).
+02a) Verdadeiro, caso a funcao hash estiver viciada (ou seja, priorizando um número ao outro) a quantidade de colisoes aumentará, aproximando as operacoes de inserir, remover e buscar para O(n), ao inves do ideal que é O(1).
+02b) Falso, o redimensionamento dinamico da tabela hash visa diminuir o fator de carga da tabela, caso o fator de carga supere o limite que nos estabelecemos ao implementar a tabela hash, haverá diversos casos de colisao, o que irá afetar o desempenho das operacoes de inserir, remover e buscar para O(n), ao inves do ideal que é O(1).
+02c) Falso, nao pode haver chaves repetidas, mas chaves diferentes podem ter o mesmo valor. Por Exemplo, Maria e Flavia tem 15 anos, elas sao chaves diferentes com o mesmo valor.
+02d) Falso, é verdade que idealmente, o hash para chaves diferentes devem ser diferentes, mas o hash nunca pode resultar num valor diferente para a mesma chave. Isso quebraria uma das regras mais importantes de uma tabela hash, a aparição de 2 elementos com a mesma chave.
+
