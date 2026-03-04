@@ -1,0 +1,2 @@
+- [how_computer_stores_data](../src/how_computer_stores_data.md)
+- [GDB Basics (Debugging C Programs)](../src/GDB%20Basics%20%28Debugging%20C%20Programs%29.md)

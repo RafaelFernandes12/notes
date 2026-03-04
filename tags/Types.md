@@ -1,0 +1,4 @@
+- [TypeScript — Type Manipulation (Advanced Types)](<../src/TypeScript%20%E2%80%94%20Type%20Manipulation%20(Advanced%20Types).md>)
+- [Java Records](../src/Java%20Records.md)
+- [Java Enums](../src/Java%20Enums.md)
+- [Java Date and Time (java.time)](../src/Java%20Date%20and%20Time%20%28java.time%29.md)

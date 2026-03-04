@@ -1,12 +1,12 @@
 ## commands
 
---- 
+______________________________________________________________________
 
 - **Date:** 2026-01-31
-- **Tags:** [Bash](tags/Bash.md) [docker](tags/Docker.md) 
-- **URL:**  
+- **Tags:** [Bash](tags/Bash.md) [docker](tags/Docker.md)
+- **URL:**
 
----
+______________________________________________________________________
 
 ### Summary
 
@@ -19,9 +19,21 @@ sudo update-alternatives --config x-terminal-emulator
 Run C code
 
 ```bash
+# basic
 gcc -o main main.c
 ./main
+
+# recommended while learning/debugging (GDB-friendly)
+gcc -g -O0 -Wall -Wextra main.c -o main
+./main
 ```
+
+Flags (why they matter):
+
+- `-O0`: turn **off** optimizations (easier to debug; code matches your source more closely).
+- `-Wall`: enable a common set of compiler **warnings**.
+- `-Wextra`: enable **more** warnings beyond `-Wall`.
+- `-g`: include **debug symbols** so GDB can show variable names/lines.
 
 Run C++ code
 
@@ -51,7 +63,6 @@ activate boxes
 sudo modprobe kvm_amd
 ```
 
-
 Restore mongo docker backup
 
 ```bash
@@ -78,16 +89,18 @@ Replace 'foo' with 'bar' in all .js files in src/routes directory
 ```
 
 Format JSON file
+
 ```bash
 :%!jq .
 ```
 
 create postgres database
+
 ```bash
 docker exec -it pg psql -U postgres -d postgres -c "create database pg_trigger;"
 ```
 
-Copy a official image:  `docker pull <IMAGE>`
+Copy a official image: `docker pull <IMAGE>`
 
 See all images: `docker images`
 
@@ -97,7 +110,7 @@ Create your own image from the Dockerfile: `docker build -t <NAME:VERSION> .`
 
 Run container of a image: `docker run <IMAGE ID/REPOSITORY/TAG>`
 
-Run a container in detached mode: `docker run -d <IMAGE ID/REPOSITORY/TAG>` 
+Run a container in detached mode: `docker run -d <IMAGE ID/REPOSITORY/TAG>`
 
 Expose the port of the container: `docker run -p <HOST_PORT:CONTAINER_PORT> <IMAGE ID>`
 
@@ -123,7 +136,7 @@ Share volume between containers: `docker run --volumes-from <NAME_CONTAINER> <IM
 
 Access the container files: `docker exec -it <NAME/IMAGE ID> sh`
 
-Copy existing image and name it:`docker tag <OLD_NAME:OLD_VERSION> <NEW_NAME:NEW_VERSON>` 
+Copy existing image and name it:`docker tag <OLD_NAME:OLD_VERSION> <NEW_NAME:NEW_VERSON>`
 
 Push images to docker registry: `docker push <USERNAME/IMAGE_NAME:IMAGE_VERSION>`
 
@@ -131,21 +144,24 @@ Get more informations from the container: `docker inspect <NAME>`
 
 See the logs from a container: `docker logs <IMAGE ID>`
 
-Follow the logs from a container: `docker logs -f <IMAGE ID>` 
+Follow the logs from a container: `docker logs -f <IMAGE ID>`
 
 Check the networks: `docker network ls`
 
 reset last commit but keep changes in working directory
+
 ```bash
 git reset --soft HEAD~1
 ```
 
 reset last commit and discard changes in working directory
+
 ```bash
 git reset --hard HEAD~1
 ```
 
 set git pull to always use merge or rebase
+
 ```bash
 git config pull.rebase false  # merge only in repo
 git config pull.rebase true   # rebase only in repo
@@ -153,30 +169,39 @@ git config --global pull.rebase false  # merge
 git config --global pull.rebase true   # rebase
 ```
 
+```bash
+git add .
+git rebase --continue # finish rebase after you done
+git rebase --abort # stop rebase and return to original state
+```
+
 generate ssh key and add to ssh agent
+
 ```bash
 ssh-keygen -t ed25519 -C "interas@gateway"
 ssh-add ~/.ssh/id_ed25519
 cat ~/.ssh/id_ed25519.pub
 ```
+
 GitHub -> Settings -> SSH and GPG keys -> New SSH key (ou “Deploy key” no repo, se for chave so dessa VM).
 
 copy folder to vm
+
 ```bash
 # -r is recursive, -P is port
 scp -r -P 77 ./instantclient_23_26 interas@131.100.25.67:~/ 
 ```
 
-
 know public IP address of machine
+
 ```bash
 curl ifconfig.me
 ```
 
+- --frozen-lockfile: refuses to update yarn.lock. If package.json and yarn.lock don’t match, it fails. Good for reproducible builds.
 
-* --frozen-lockfile: refuses to update yarn.lock. If package.json and yarn.lock don’t match, it fails. Good for reproducible builds.
-- --production: installs only dependencies, skips devDependencies.
-- --non-interactive: prevents prompts (good for CI/Docker).
+* --production: installs only dependencies, skips devDependencies.
+* --non-interactive: prevents prompts (good for CI/Docker).
 
 ```bash
 yarn install [options]
@@ -187,4 +212,3 @@ Check memory usage
 ```bash
 free -h
 ```
-
