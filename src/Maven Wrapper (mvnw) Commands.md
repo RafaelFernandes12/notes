@@ -3,7 +3,7 @@
 ______________________________________________________________________
 
 **Date:** 2026-03-02
-**Tags:** [Maven](../tags/Maven.md), [Java](../tags/Java.md), [Spring_Boot](../tags/Spring_Boot.md), [Bash](../tags/Bash.md)
+**Tags:** [Java](../tags/Java.md), [Spring_Boot](../tags/Spring_Boot.md), [Bash](../tags/Bash.md)
 **URL:** https://maven.apache.org/wrapper/
 
 ______________________________________________________________________
@@ -19,7 +19,7 @@ When you run `./mvnw ...` it:
 
 It still needs a **JDK** to compile Java projects (because it calls `javac`).
 
----
+______________________________________________________________________
 
 ## How to use (common commands)
 
@@ -127,7 +127,7 @@ Show debug logs:
 ./mvnw -X test
 ```
 
----
+______________________________________________________________________
 
 ## Example 1 — Running from the “wrong” directory
 
@@ -146,7 +146,7 @@ or run it with the full relative path:
 ./path/to/project/mvnw spring-boot:run
 ```
 
----
+______________________________________________________________________
 
 ## Example 2 — “release version 21 not supported”
 
@@ -161,7 +161,7 @@ javac -version   # must exist and match the intended JDK
 
 Common fix on Linux distros: install the *JDK* (not only the runtime/headless package) so `javac` exists.
 
----
+______________________________________________________________________
 
 ## Example 3 — UnsupportedClassVersionError
 
@@ -182,7 +182,7 @@ java -version
 java -jar target/*.jar
 ```
 
----
+______________________________________________________________________
 
 ## Notes & links
 

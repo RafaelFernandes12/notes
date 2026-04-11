@@ -7,17 +7,11 @@ ______________________________________________________________________
 
 - [Uf](../tags/Uf.md)
 - [SistemasOperacionais](../tags/SistemasOperacionais.md)
-- [Kernel](../tags/Kernel.md)
-- [Processos](../tags/Processos.md)
-- [Memoria](../tags/Memoria.md)
-- [Arquivos](../tags/Arquivos.md)
-- [EntradaESaida](../tags/EntradaESaida.md)
-- [ChamadasDeSistema](../tags/ChamadasDeSistema.md)
 
 **Assets:**
 
-- [Aula_01\_-_SO_-\_2026.1.pdf](../assets/Aula_01_-_SO_-_2026.1.pdf)
-- \[Sistemas operacionais modernos\](../assets/TANENBAUM_BOOK.indb - Sistemas Operacionais Modernos Andrew S. Tanenbaum, Herbert Bos.pdf)
+- https://drive.google.com/file/d/1HYKBK0-X2DmtvAkH7DcfcNLisT01C5bj/view
+- https://drive.google.com/file/d/12FRdo7v-dIWLGi4T5CZKFEWiGRqc5Rc4/view
 
 **URL:**
 

@@ -1,1 +1,6 @@
 - [Banco de Dados (Introducao a SGBD)](../src/Banco%20de%20Dados%20%28Introducao%20a%20SGBD%29.md)
+- [Arquitetura de Tres Esquemas e Independencia de Dados (SGBD)](../src/Arquitetura%20de%20Tres%20Esquemas%20e%20Independencia%20de%20Dados%20%28SGBD%29.md)
+- [Modelo Relacional (BD) — Instância, Esquema, Chaves e Restrições](../src/Modelo%20Relacional%20%28BD%29%20%E2%80%94%20Inst%C3%A2ncia%2C%20Esquema%2C%20Chaves%20e%20Restri%C3%A7%C3%B5es.md)
+- [JPA One-to-Many and Many-to-One (Associations)](../src/JPA%20One-to-Many%20and%20Many-to-One%20%28Associations%29.md)
+- [Modelagem de Dados - Entidades, Componentes, Tabelas e Relacionamentos](../src/Modelagem%20de%20Dados%20-%20Entidades%2C%20Componentes%2C%20Tabelas%20e%20Relacionamentos.md)
+- [JPA vs Hibernate (Differences and When to Use Each)](../src/JPA%20vs%20Hibernate%20%28Differences%20and%20When%20to%20Use%20Each%29.md)

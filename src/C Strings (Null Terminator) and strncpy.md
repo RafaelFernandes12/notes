@@ -6,8 +6,6 @@ ______________________________________________________________________
 **Tags:**
 
 - [C](../tags/C.md)
-- [Strings](../tags/Strings.md)
-- [C_Standard_Library](../tags/C_Standard_Library.md)
 - [Security](../tags/Security.md)
 
 **URL:**
@@ -35,7 +33,7 @@ That last `\0` is how functions like `printf("%s", ...)`, `strlen`, `strcpy`, et
 
 If `\0` is missing, C will keep reading *past the end* of your array until it *happens* to find a `\0` somewhere else in memory (this can print garbage or crash).
 
----
+______________________________________________________________________
 
 ## What `strncpy` means
 
@@ -55,7 +53,7 @@ The important behavior depends on the length of `src`:
 
 This is the part that surprises many beginners.
 
----
+______________________________________________________________________
 
 ## Example 1 (your struct): copying a 2-letter province safely
 
@@ -85,7 +83,7 @@ Note: writing `"ON"` would also work here, because C string literals already inc
 strncpy(student1.province, "ON", sizeof(student1.province));
 ```
 
----
+______________________________________________________________________
 
 ## Example 2 (common bug): copied text but forgot the stop marker
 
@@ -102,7 +100,7 @@ There is **no room** left for `\0`, so `province` is **not** a valid C string.
 
 Then `printf("%s", province)` will keep reading bytes *after* `province` until it finds a `\0` somewhere else. That’s why this is dangerous.
 
----
+______________________________________________________________________
 
 ## Example 3 (practical safety pattern): force a `\0`
 
@@ -115,7 +113,7 @@ dest[sizeof(dest) - 1] = '\0';
 
 This guarantees the last byte is the stop marker even if `src` was too long.
 
----
+______________________________________________________________________
 
 ## When would I use `strncpy`?
 
@@ -127,7 +125,7 @@ Historically, people used `strncpy` to copy into fixed-size arrays. But because 
 
 The key is: decide if you’re copying a *string* (must end with `\0`) or just *bytes*.
 
----
+______________________________________________________________________
 
 ## Quick mental checklist
 

@@ -2,3 +2,5 @@
 - [Java Records](../src/Java%20Records.md)
 - [Java Enums](../src/Java%20Enums.md)
 - [Java Date and Time (java.time)](../src/Java%20Date%20and%20Time%20%28java.time%29.md)
+- [Fundamentos de Java e POO](../src/Fundamentos%20de%20Java%20e%20POO.md)
+- [Java Interfaces](../src/Java%20Interfaces.md)

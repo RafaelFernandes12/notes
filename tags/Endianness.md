@@ -1,0 +1,1 @@
+- [Forensics Data Representation Basics — Number Systems, ASCII, Time, Endianness](../src/Forensics%20Data%20Representation%20Basics%20%E2%80%94%20Number%20Systems%2C%20ASCII%2C%20Time%2C%20Endianness.md)

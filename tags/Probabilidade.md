@@ -1,0 +1,2 @@
+
+- [Conceitos de estatistica](../src/Conceito%20de%20estatistica%3F%20Aula%201.md)

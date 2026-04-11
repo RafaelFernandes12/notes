@@ -1,0 +1,626 @@
+Sistemas Numéricos
+Forense Computacional
+(IMD0718)
+Prof. Dr. Ramon dos Reis Fontes
+ramon.fontes@imd.ufrn.br
+
+adapted from Number Systems: Frank Xu wxu@ubalt.edu
+
+1
+
+Overview
+• Sistemas numéricos e conversão
+• Data, formato de data, conversão de data
+• Código Padrão Americano para Intercâmbio de Informações (código
+ASCII)
+• Dados armazenados na memória
+
+2
+
+Sobre o envio do laboratório
+●
+
+Considere a folha de respostas para o Lab1 disponível no gdrive
+
+3
+
+Sistemas Numéricos
+
+4
+
+System
+
+Base Symbols
+
+Used by Used by
+humans? CPU?
+
+Used by Forensic
+Professionals?
+
+Decimal
+
+10
+
+0, 1, … 9
+
+Yes
+
+No
+
+Yes
+
+Binary
+
+2
+
+0, 1
+
+No
+
+Yes
+
+Yes
+
+Hexadecimal
+
+16
+
+0, 1, … 9,
+A, B, … F
+
+No
+
+No
+
+Yes
+
+5
+
+Conversão entre sistemas numéricos
+Decimal
+
+Binário
+
+Hexadecimal
+
+6
+
+Tabela de conversão
+HexaDecimal Binário decimal
+
+HexaDecimal Binário decimal
+
+0
+
+0
+
+0
+
+8
+
+1000
+
+8
+
+1
+
+1
+
+1
+
+9
+
+1001
+
+9
+
+2
+
+10
+
+2
+
+10
+
+1010
+
+A
+
+3
+
+11
+
+3
+
+11
+
+1011
+
+B
+
+4
+
+100
+
+4
+
+12
+
+1100
+
+C
+
+5
+
+101
+
+5
+
+13
+
+1101
+
+D
+
+6
+
+110
+
+6
+
+14
+
+1110
+
+E
+
+7
+
+111
+
+7
+
+15
+
+1111
+
+F
+7
+
+Adição Binária
+A
+0
+0
+1
+1
+
+B
+0
+1
+0
+1
+
+A+B
+0
+1
+1
+10
+
+1
+
+1
+
+10101
++ 11001
+101110
+
+21
++ 25
+46
+
+carregar
+bit
+
+8
+
+Decimal para Decimal
+espaço
+reservado
+
+Decimal
+
+Peso
+
+12610 =>6 x 100 = 6
+2 x 101 =
+20
+1 x 102 =
+100
+126
+Base
+9
+
+Binário para Decimal
+• Multiply each bit by 2n,
+where n is the “weight” of
+the bit
+• The weight is the position
+of the bit, starting from 0
+on the right
+• Add the results
+
+espaço
+reservado
+
+peso
+
+1010102 => 0 x 20 =
+1 x 21 =
+0 x 22 =
+1 x 23 =
+0 x 24 =
+1 x 25 =
+Base
+
+0
+2
+0
+8
+0
+32
+4210
+
+$(()): Shell Arithmetic
+2# base 2
+10
+
+Binário para Decimal (código Python)
+Check Python version
+
+I use Python version 3.9
+
+# hex to int
+int ("800", 16)
+
+11
+
+Hexadecimal para Decimal
+• Multiply each bit by 16n,
+where n is the “weight” of
+the bit
+• The weight is the position
+of the bit, starting from 0
+on the right
+• Add the results
+
+AB216 => (?)10
+2 x 160 = 2 x
+1 =
+2
+B x 161 = 11 x 16 = 176
+A x 162 = 10 x 256 = 2560
+273810
+
+$(()): Shell Arithmetic
+
+python code: int("ab2", 16)
+
+12
+
+Decimal para Binário
+
+12610 = (?)2
+
+• Divide by 2, keep track of
+the remainder
+• First remainder is bit 0 (LSB,
+least-significant bit)
+• Second remainder is bit 1
+• Etc.
+
+2 126
+2 63
+2 31
+2 15
+7
+2
+3
+2
+1
+2
+0
+
+stop
+
+0
+1
+1
+1
+1
+1
+1
+
+12610 = 11111102
+basic
+calculator
+
+13
+
+Decimal to Hexadecimal
+• Divide by 16
+• Keep track of the remainder
+
+273810 = (?)16
+16
+16
+16
+
+2738
+171
+10
+0
+
+2
+11 = B
+10 = A
+
+273810 = AB216
+controls the output as in C printf
+%d - Print the argument as a signed decimal integer.
+%x - Print the argument as an unsigned hexadecimal integer.
+%s - Print the argument as a string.
+14
+
+Decimal to Binário and Hex (Código Python)
+Decimal to Binary
+
+Decimal to Hex
+
+15
+
+Binário para Hexadecimal
+• Group bits in fours, starting on
+right
+• Convert to hexadecimal digits
+
+1010101100102 = ?16
+
+1010 1011 0010
+10
+
+11
+
+2
+
+A
+
+B
+
+2
+
+1010101100102 = AB216
+
+16
+
+Código Padrão Americano para
+Intercâmbio de Informações
+Código ASCII
+
+17
+
+Bit, Byte
+• A ‘bit’ (from Binary + digIT)
+• is the smallest unit of memory,
+• the unit of measurement of
+data information.
+
+• Byte 8-bit collections
+• A single bit holds so little
+information.
+• A byte holds one ASCII
+
+18
+
+ASCII - American Standard Code for Information Interchange
+• ASCII codes
+represent text in
+computing devices.
+
+19
+
+20
+
+Conversão de número e ASCII
+Hex to ASCII string (1)
+
+Decimal to ASCII string (2)
+
+ASCII to Hex (3)
+
+21
+
+Conversão Decimal e ASCII char (Python
+version)
+Decimal to an ASCII char
+
+ord()
+Dec
+
+ASCII
+chr()
+
+22
+
+Conversão de Número e ASCII (Python
+Python 3
+version)
+
+Python 2
+
+ASCII to Hex
+
+ASCII to Hex
+
+Hex to ASCII string
+
+Hex to ASCII
+
+encode(“hex”)
+
+hexlify()
+Hex
+
+ASCII
+unhexlify()
+
+Hex
+
+ASCII
+decode(“hex”)
+
+23
+
+Qual é a diferença entre ASCII e UTF-8
+Unicode?
+• Both are character encoding standards used for representing
+characters
+• letters, numbers, symbols, etc.
+• use a series of bits (1s and 0s).
+
+• Length difference
+• ASCII uses 7 bits (128 characters)
+• UTF-8 uses variable-length encoding (1,112,064 characters)
+
+• UTF-8 is a superset of ASCII
+• all ASCII characters have the same representation in UTF-8.
+• UTF-8 can represent a wider range of characters, including non-English
+characters
+24
+
+Unicode
+
+Unicode, formally The Unicode
+Standard is an information
+technology standard for the
+consistent encoding, representation,
+and handling of text expressed in
+most of the world's writing systems.
+
+https://en.wikipedia.org/wiki/Unicode
+
+25
+
+Conversão de data
+
+26
+
+Unix time
+• Unix time, or POSIX time, is a system for describing points in time.
+• It is the number of seconds that have elapsed since the Unix epoch,
+• The Unix epoch is 00:00:00 UTC on 1 January 1970
+Current time to Unix time
+
+Unix time to readable time
+
+27
+
+Unix time (Python version)
+0 second => UTC Jan, 1st, 1970
+
+• A Python module is a .py file that
+contains Python code.
+• A Python module contains multiple
+functions
+• Use keyword from and import if you only
+want to import a few functions,
+from [module] import [function1, function2]
+
+UTC Jan, 1st, 1970 => 0 second
+
+28
+
+format
+
+datetime(year, month, day, hour, minute, second,
+microsecond)
+
+Get current time (datetime Module)
+
+Get the current time (time Module)
+
+Get the current time in a
+human-readable format
+Get the current time in seconds. It
+returns the number of seconds since
+Jan 1, 1970, 00:00:00.
+29
+
+Covert seconds to a readable time (datetime Module)
+our default time zone is
+EST. Pay attention to the 5
+hours difference
+If the timestamps are in UTC timezone (a common way to store
+dates) you should use
+
+30
+
+Mac "epoch time" - Cocoa Core Date
+• Mac uses a different "epoch time" than the UNIX epoch time.
+• Cocoa Core Date
+
+• Mac OS epoch date is Midnight January 1, 2001, UTC
+• Cocoa Core Data time is the number of seconds elapsed since January 1,
+2001, 00:00:00 UTC,
+
+• Different is 31 years (978307200 seconds)
+
+31
+
+Write a function to compute the difference between Unix time and iOS time
+
+32
+
+Código Hash
+
+33
+
+Comandos Linux
+• echo appends a \n
+• Use the -n argument to omit
+the trailing linebreak
+
+34
+
+Python
+
+35
+
+Dados armazenados na memória
+
+36
+
+Endianness
+• Endianness is a term that describe the order in which a sequence of
+bytes (byte order) is stored in memory.
+• Little-endian
+• is an order in which the "little end" (least significant value in the sequence) is
+stored first.
+
+• Big-endian
+• is an order in which the "big end" (most significant value in the sequence) is
+stored first (at the lowest storage address).
+
+37
+
+Least significant value
+
+https://www.iar.com/knowledge/learn/programming/migration-techniques-for-different-endianness/
+
+38
+
+Check Byte order
+
+39
+
+

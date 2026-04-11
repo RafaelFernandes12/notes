@@ -1,0 +1,2 @@
+- [Python self (Instance Methods)](../src/Python%20self%20%28Instance%20Methods%29.md)
+- [Java Interfaces](../src/Java%20Interfaces.md)

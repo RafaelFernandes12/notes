@@ -3,7 +3,7 @@
 ______________________________________________________________________
 
 **Date:** 2026-03-02
-**Tags:** [Java](../tags/Java.md), [Spring_Boot](../tags/Spring_Boot.md), [Validation](../tags/Validation.md), [Maven](../tags/Maven.md)
+**Tags:** [Java](../tags/Java.md), [Spring_Boot](../tags/Spring_Boot.md)
 **URL:** https://jakarta.ee/specifications/bean-validation/
 
 ______________________________________________________________________

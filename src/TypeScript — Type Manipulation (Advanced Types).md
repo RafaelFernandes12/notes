@@ -1,12 +1,12 @@
 # TypeScript — Type Manipulation (Advanced Types)
 
----
+______________________________________________________________________
 
 **Date:** 2026-02-27
-**Tags:** [TypeScript](../tags/TypeScript.md) [Js](../tags/Js.md) [Types](../tags/Types.md) [Generics](../tags/Generics.md) [UtilityTypes](../tags/UtilityTypes.md)
+**Tags:** [TypeScript](../tags/TypeScript.md) [Js](../tags/Js.md) [Types](../tags/Types.md)
 **URL:** https://www.typescriptlang.org/docs/handbook/2/types-from-types.html • https://www.typescriptlang.org/docs/handbook/2/conditional-types.html • https://www.typescriptlang.org/docs/handbook/utility-types.html • https://www.typescriptlang.org/docs/handbook/2/template-literal-types.html
 
----
+______________________________________________________________________
 
 ## Concept (what)
 

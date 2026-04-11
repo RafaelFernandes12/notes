@@ -19,6 +19,73 @@ In Spring Boot apps, you typically use **JPA annotations first**, and only add H
 
 ______________________________________________________________________
 
+## Key terms (Entity/Table/Embeddable/Embedded/Component)
+
+### `@Entity` (what is an entity?)
+
+An **entity** is a class with an identity (`@Id`) whose instances are stored as **rows** and tracked by the persistence context.
+
+- Has a primary key (`@Id` / `@EmbeddedId`).
+- Lifecycle is managed (persist/merge/remove).
+- Typically mapped to exactly one table (or a set of tables with inheritance).
+
+```java
+import jakarta.persistence.*;
+
+@Entity
+class Customer {
+  @Id @GeneratedValue
+  Long id;
+}
+```
+
+### `@Table` (what does it do?)
+
+`@Table` configures **table-level** mapping details for an entity: table name, schema, unique constraints, and indexes.
+
+- Optional. If omitted, the table name is derived from the entity name + naming strategy.
+- Use it when you need explicit DB naming/constraints/indexes.
+
+```java
+import jakarta.persistence.*;
+
+@Entity
+@Table(
+  name = "customers",
+  uniqueConstraints = {
+    @UniqueConstraint(name = "uk_customers_email", columnNames = "email")
+  },
+  indexes = {
+    @Index(name = "idx_customers_created_at", columnList = "created_at")
+  }
+)
+class Customer {
+  @Id @GeneratedValue Long id;
+
+  @Column(name = "email", nullable = false)
+  String email;
+
+  @Column(name = "created_at", nullable = false)
+  java.time.Instant createdAt;
+}
+```
+
+### `@Embeddable` / `@Embedded` (what are they?)
+
+These model a **value object** (no identity) whose fields are stored in the *same table* as the owning entity.
+
+- `@Embeddable`: marks the value-object type.
+- `@Embedded`: uses that type inside an entity.
+- The embedded fields become columns of the owning entity’s table.
+- You can reuse the same embeddable in many entities.
+
+### “Component” (Hibernate term)
+
+Historically, Hibernate called embedded/value-type mappings **components**. In modern Hibernate/JPA usage:
+
+- Prefer JPA `@Embeddable` / `@Embedded`.
+- You’ll still see “component” in docs, blog posts, and older code.
+
 ## How to use (examples)
 
 ### Example 1 — the “core” mapping annotations (`@Entity`, `@Id`, columns, timestamps)
@@ -188,9 +255,81 @@ class Payment {
 }
 ```
 
+Same embeddable used twice (use `@AttributeOverride(s)` to avoid column-name clashes):
+
+```java
+import jakarta.persistence.*;
+
+@Embeddable
+class Address {
+  @Column(nullable = false, length = 80) String street;
+  @Column(nullable = false, length = 60) String city;
+  @Column(nullable = false, length = 2)  String state;
+  @Column(nullable = false, length = 10) String zip;
+}
+
+@Entity
+@Table(name = "orders")
+class Order {
+  @Id @GeneratedValue Long id;
+
+  @Embedded
+  @AttributeOverrides({
+    @AttributeOverride(name = "street", column = @Column(name = "shipping_street")),
+    @AttributeOverride(name = "city",   column = @Column(name = "shipping_city")),
+    @AttributeOverride(name = "state",  column = @Column(name = "shipping_state")),
+    @AttributeOverride(name = "zip",    column = @Column(name = "shipping_zip"))
+  })
+  Address shipping;
+
+  @Embedded
+  @AttributeOverrides({
+    @AttributeOverride(name = "street", column = @Column(name = "billing_street")),
+    @AttributeOverride(name = "city",   column = @Column(name = "billing_city")),
+    @AttributeOverride(name = "state",  column = @Column(name = "billing_state")),
+    @AttributeOverride(name = "zip",    column = @Column(name = "billing_zip"))
+  })
+  Address billing;
+}
+```
+
 ______________________________________________________________________
 
-### Example 4 — optimistic locking (`@Version`)
+### Example 4 — composite IDs with `@Embeddable` + `@EmbeddedId`
+
+Use `@EmbeddedId` when the *entity identity itself* is a value object (composite primary key).
+
+```java
+import jakarta.persistence.*;
+import java.io.Serializable;
+
+@Embeddable
+class EnrollmentId implements Serializable {
+  @Column(name = "student_id") Long studentId;
+  @Column(name = "course_id")  Long courseId;
+
+  // In real code: implement equals/hashCode for IDs.
+}
+
+@Entity
+@Table(name = "enrollments")
+class Enrollment {
+  @EmbeddedId
+  EnrollmentId id;
+
+  @Column(nullable = false)
+  java.time.Instant enrolledAt;
+}
+```
+
+Rule of thumb:
+
+- `@Embedded` = part of the entity state (value object columns in the same table).
+- `@EmbeddedId` = the entity identifier is an embeddable (composite PK).
+
+______________________________________________________________________
+
+### Example 5 — optimistic locking (`@Version`)
 
 Use `@Version` to prevent lost updates when multiple requests update the same row.
 
@@ -214,7 +353,7 @@ If two transactions edit the same entity concurrently, the second commit will fa
 
 ______________________________________________________________________
 
-### Example 5 — soft delete (Hibernate-specific)
+### Example 6 — soft delete (Hibernate-specific)
 
 Instead of deleting rows, you can mark them as deleted.
 
@@ -250,7 +389,7 @@ JPA (`jakarta.persistence.*`):
 - `@Entity`, `@Table`, `@Id`, `@GeneratedValue`, `@Column`, `@Index`
 - `@ManyToOne`, `@OneToMany`, `@OneToOne`, `@ManyToMany`, `@JoinColumn`, `@JoinTable`
 - `@Enumerated`
-- `@Embeddable`, `@Embedded`, `@AttributeOverride(s)`
+- `@Embeddable`, `@Embedded`, `@AttributeOverride(s)`, `@EmbeddedId`
 - `@Version`
 - `@Transient`
 
@@ -267,3 +406,7 @@ ______________________________________________________________________
 - Hibernate ORM user guide — annotations: https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html#annotations
 - JPA (Jakarta Persistence) overview: https://jakarta.ee/specifications/persistence/
 - `@Entity` Javadoc: https://jakarta.ee/specifications/persistence/3.1/apidocs/jakarta.persistence/jakarta/persistence/entity
+- `@Table` Javadoc: https://jakarta.ee/specifications/persistence/3.1/apidocs/jakarta.persistence/jakarta/persistence/table
+- `@Embeddable` Javadoc: https://jakarta.ee/specifications/persistence/3.1/apidocs/jakarta.persistence/jakarta/persistence/embeddable
+- `@Embedded` Javadoc: https://jakarta.ee/specifications/persistence/3.1/apidocs/jakarta.persistence/jakarta/persistence/embedded
+- `@EmbeddedId` Javadoc: https://jakarta.ee/specifications/persistence/3.1/apidocs/jakarta.persistence/jakarta/persistence/embeddedid

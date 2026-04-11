@@ -1,3 +1,5 @@
 - [TypeScript — Interface vs Type](../src/TypeScript%20%E2%80%94%20Interface%20vs%20Type.md)
 - [TypeScript — Type Manipulation (Advanced Types)](<../src/TypeScript%20%E2%80%94%20Type%20Manipulation%20(Advanced%20Types).md>)
 - [Node.js CLI Eval (-e)](../src/Node.js%20CLI%20Eval%20%28-e%29.md)
+- [NPM Packaging (npm link, npm pack, publish)](../src/NPM%20Packaging%20%28npm%20link%2C%20npm%20pack%2C%20publish%29.md)
+- [Node.js Modules (CommonJS vs ESM)](../src/Node.js%20Modules%20%28CommonJS%20vs%20ESM%29.md)

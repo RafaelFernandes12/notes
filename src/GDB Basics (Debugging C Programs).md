@@ -3,14 +3,14 @@
 ______________________________________________________________________
 
 **Date:** 2026-03-03
+**Subject:** [Forense.md](tags/Forense.md)
 **Tags:**
 
-- [GDB](../tags/GDB.md)
-- [Debugging](../tags/Debugging.md)
 - [C](../tags/C.md)
 - [Linux](../tags/Linux.md)
 - [Forense](../tags/Forense.md)
 
+**Assets:**
 **URL:**
 
 - https://sourceware.org/gdb/current/onlinedocs/gdb/

@@ -3,7 +3,7 @@
 ______________________________________________________________________
 
 **Date:** 2026-03-02
-**Tags:** [Maven](../tags/Maven.md), [Java](../tags/Java.md), [Dependencies](../tags/Dependencies.md), [Spring_Boot](../tags/Spring_Boot.md)
+**Tags:** [Java](../tags/Java.md), [Spring_Boot](../tags/Spring_Boot.md)
 **URL:** https://mvnrepository.com/
 
 ______________________________________________________________________

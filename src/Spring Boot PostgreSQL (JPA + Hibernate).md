@@ -3,7 +3,7 @@
 ______________________________________________________________________
 
 **Date:** 2026-03-02
-**Tags:** [Spring_Boot](../tags/Spring_Boot.md), [Java](../tags/Java.md), [Postgres](../tags/Postgres.md), [JPA](../tags/JPA.md), [Hibernate](../tags/Hibernate.md), [Flyway](../tags/Flyway.md), [Docker](../tags/Docker.md), [Maven](../tags/Maven.md), [Dependencies](../tags/Dependencies.md), [BancoDeDados](../tags/BancoDeDados.md), [Config](../tags/Config.md)
+**Tags:** [Spring_Boot](../tags/Spring_Boot.md), [Java](../tags/Java.md), [JPA](../tags/JPA.md), [Hibernate](../tags/Hibernate.md), [BancoDeDados](../tags/BancoDeDados.md)
 **URL:** https://docs.spring.io/spring-boot/docs/current/reference/html/data.html#data.sql
 
 ______________________________________________________________________
@@ -13,14 +13,14 @@ ______________________________________________________________________
 To use **PostgreSQL** with a **Spring Boot** app (using **JPA/Hibernate**) you typically need:
 
 1. A running Postgres instance
-2. JDBC + JPA dependencies
-3. Spring Boot datasource + JPA configuration
+1. JDBC + JPA dependencies
+1. Spring Boot datasource + JPA configuration
 
 Optional but recommended:
 
 - **Flyway** (or Liquibase) for database migrations
 
----
+______________________________________________________________________
 
 ## How to use (examples)
 
@@ -57,7 +57,7 @@ volumes:
   pgdata:
 ```
 
----
+______________________________________________________________________
 
 ### Example 2 — Add Maven dependencies (JPA + Postgres + Flyway)
 
@@ -91,7 +91,7 @@ In `pom.xml`:
 </dependencies>
 ```
 
----
+______________________________________________________________________
 
 ### Example 3 — Configure `application.properties`
 
@@ -115,7 +115,7 @@ For real projects, prefer migrations and validate schema:
 spring.jpa.hibernate.ddl-auto=validate
 ```
 
----
+______________________________________________________________________
 
 ### Example 4 — A tiny JPA/Hibernate mapping (Entity + Repository)
 
@@ -149,7 +149,7 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {}
 
 At runtime, Spring Data uses Hibernate + the Postgres driver to generate SQL.
 
----
+______________________________________________________________________
 
 ### Example 5 — Flyway migration for the same table
 
@@ -172,7 +172,7 @@ spring.jpa.hibernate.ddl-auto=validate
 
 Flyway will apply migrations on startup; Hibernate will validate mappings vs schema.
 
----
+______________________________________________________________________
 
 ## Common pitfalls
 
@@ -180,7 +180,7 @@ Flyway will apply migrations on startup; Hibernate will validate mappings vs sch
 - Using `EnumType.ORDINAL` in JPA (use `EnumType.STRING` unless you *really* know why).
 - Assuming `localhost` works inside Docker for the app container (if app is also in Docker, use the service name).
 
----
+______________________________________________________________________
 
 ## Links
 

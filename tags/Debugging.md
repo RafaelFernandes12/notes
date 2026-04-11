@@ -1,1 +1,0 @@
-- [GDB Basics (Debugging C Programs)](../src/GDB Basics (Debugging C Programs).md)

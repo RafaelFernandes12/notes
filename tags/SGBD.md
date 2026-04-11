@@ -1,1 +1,0 @@
-- [Banco de Dados (Introducao a SGBD)](../src/Banco%20de%20Dados%20%28Introducao%20a%20SGBD%29.md)

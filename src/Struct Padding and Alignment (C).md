@@ -6,9 +6,6 @@ ______________________________________________________________________
 **Tags:**
 
 - [C](../tags/C.md)
-- [Structs](../tags/Structs.md)
-- [Memory](../tags/Memory.md)
-- [Data_Alignment](../tags/Data_Alignment.md)
 - [Security](../tags/Security.md)
 
 **URL:**
@@ -32,7 +29,7 @@ So:
 
 - “sum of field sizes” can be smaller than `sizeof(struct ...)`.
 
----
+______________________________________________________________________
 
 ## How to *see* padding (the idea)
 
@@ -61,7 +58,7 @@ int main(void) {
 }
 ```
 
----
+______________________________________________________________________
 
 ## Example 1: why your `Student` often becomes 12 bytes (not 11)
 
@@ -82,7 +79,7 @@ Typical layout (byte offsets):
 
 Total: 4 + 3 + 1(padding) + 4 = **12** bytes.
 
----
+______________________________________________________________________
 
 ## Example 2: field order can change the amount of padding
 
@@ -127,7 +124,7 @@ Total: 4 + 1 + 1 + 2 = **8** bytes.
 
 Rule of thumb: **put bigger-aligned fields first** (e.g., `double`, pointers, `int`) and smaller ones later.
 
----
+______________________________________________________________________
 
 ## Example 3: removing padding with `packed` (use carefully)
 
@@ -151,7 +148,7 @@ But packed structs can be dangerous/slow:
 
 Packed structs are common for **network/file formats** (exact byte layout matters), but they need extra care when reading/writing fields.
 
----
+______________________________________________________________________
 
 ## Why this matters (bugs + security)
 

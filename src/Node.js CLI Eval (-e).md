@@ -1,12 +1,12 @@
 # Node.js CLI Eval (-e)
 
----
+______________________________________________________________________
 
 **Date:** 2026-03-04
-**Tags:** [Js](../tags/Js.md), [Bash](../tags/Bash.md), [Processos](../tags/Processos.md)
+**Tags:** [Js](../tags/Js.md), [Bash](../tags/Bash.md)
 **URL:** https://nodejs.org/api/cli.html#-e---eval-script
 
----
+______________________________________________________________________
 
 ## O que é
 

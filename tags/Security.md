@@ -1,3 +1,6 @@
 - [C Strings (Null Terminator) and strncpy](../src/C Strings (Null Terminator) and strncpy.md)
 - [how_computer_stores_data](../src/how_computer_stores_data.md)
 - [Struct Padding and Alignment (C)](../src/Struct Padding and Alignment (C).md)
+- [Forensics Data Representation Basics — Number Systems, ASCII, Time, Endianness](../src/Forensics%20Data%20Representation%20Basics%20%E2%80%94%20Number%20Systems%2C%20ASCII%2C%20Time%2C%20Endianness.md)
+- [Spring Beans (IoC Container and Dependency Injection)](../src/Spring%20Beans%20%28IoC%20Container%20and%20Dependency%20Injection%29.md)
+- [JWT Bearer Authentication (Spring Boot + Spring Security)](../src/JWT%20Bearer%20Authentication%20%28Spring%20Boot%20%2B%20Spring%20Security%29.md)

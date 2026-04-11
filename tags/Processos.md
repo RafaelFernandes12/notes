@@ -1,2 +1,0 @@
-- [Sistemas Operacionais (Introducao)](../src/Sistemas%20Operacionais%20%28Introducao%29.md)
-- [Node.js CLI Eval (-e)](../src/Node.js%20CLI%20Eval%20%28-e%29.md)

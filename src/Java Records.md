@@ -3,7 +3,7 @@
 ______________________________________________________________________
 
 **Date:** 2026-03-02
-**Tags:** [Java](../tags/Java.md), [Records](../tags/Records.md), [Types](../tags/Types.md), [Validation](../tags/Validation.md), [Spring_Boot](../tags/Spring_Boot.md)
+**Tags:** [Java](../tags/Java.md), [Types](../tags/Types.md), [Spring_Boot](../tags/Spring_Boot.md)
 **URL:** https://docs.oracle.com/en/java/javase/14/language/records.html#GUID-6699E26F-4A9B-4393-A08B-1E47D4B2D263
 
 ______________________________________________________________________
@@ -26,7 +26,7 @@ Records:
 - are implicitly `final` (can’t be subclassed)
 - can declare methods, static fields, and constructors (with some rules)
 
----
+______________________________________________________________________
 
 ## How to declare (the syntax)
 
@@ -70,7 +70,7 @@ final class Point extends java.lang.Record {
 }
 ```
 
----
+______________________________________________________________________
 
 ## How to use (examples)
 
@@ -94,7 +94,7 @@ class Demo {
 }
 ```
 
----
+______________________________________________________________________
 
 ### Example 2 — validation/invariants with a compact constructor
 
@@ -138,7 +138,7 @@ public record TimeRange(Instant start, Instant end) {
 }
 ```
 
----
+______________________________________________________________________
 
 ### Example 3 — records can have behavior (methods) and implement interfaces
 
@@ -167,7 +167,7 @@ public record Money(long cents, String currency) implements Comparable<Money> {
 }
 ```
 
----
+______________________________________________________________________
 
 ### Example 4 — keep immutability when components are mutable
 
@@ -190,7 +190,7 @@ public record Tags(List<String> values) {
 }
 ```
 
----
+______________________________________________________________________
 
 ### Example 5 — Jakarta Validation annotations on record components
 
@@ -224,7 +224,7 @@ class UserController {
 }
 ```
 
----
+______________________________________________________________________
 
 ## Rules/constraints that matter in practice
 
@@ -238,7 +238,7 @@ class UserController {
   - records can `implements` interfaces
 - **Accessors** are named exactly like components (`name()`), which can affect conventions (e.g., serialization frameworks).
 
----
+______________________________________________________________________
 
 ## Links
 

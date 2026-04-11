@@ -1,1 +1,0 @@
-- [C Strings (Null Terminator) and strncpy](../src/C Strings (Null Terminator) and strncpy.md)

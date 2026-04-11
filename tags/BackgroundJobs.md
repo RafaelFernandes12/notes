@@ -1,1 +1,2 @@
 - [Queue-based Background Jobs (Bull + Redis)](<../src/Queue-based%20Background%20Jobs%20(Bull%20+%20Redis).md>)
+- [Scheduled Jobs in Spring Boot](../src/Scheduled%20Jobs%20in%20Spring%20Boot.md)

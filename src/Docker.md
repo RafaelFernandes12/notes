@@ -97,3 +97,5 @@ See the logs with timestamp from a container: `docker logs -t <IMAGE ID>`
 Follow the logs from a container: `docker logs -f <CONTAINER ID>`
 
 Check the networks: `docker network ls`
+
+Create a network: `docker network create <NAME>`

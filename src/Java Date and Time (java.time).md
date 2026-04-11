@@ -3,7 +3,7 @@
 ______________________________________________________________________
 
 **Date:** 2026-03-02
-**Tags:** [Java](../tags/Java.md), [Java_Time](../tags/Java_Time.md), [Types](../tags/Types.md), [Rest](../tags/Rest.md), [BancoDeDados](../tags/BancoDeDados.md)
+**Tags:** [Java](../tags/Java.md), [Types](../tags/Types.md), [Rest](../tags/Rest.md), [BancoDeDados](../tags/BancoDeDados.md)
 **URL:** https://docs.oracle.com/javase/8/docs/api/java/time/package-summary.html
 
 ______________________________________________________________________
@@ -27,7 +27,26 @@ Rule of thumb for scheduling/agendamento systems:
 - **Accept/return in API:** `OffsetDateTime` (or `Instant`)
 - Keep the **business timezone** separately (e.g. `ZoneId` string like `America/Sao_Paulo`) for display and slot rules.
 
----
+Legacy note (`java.util.Date`):
+
+- `Date` is a **legacy** type that actually represents a **moment in time** (epoch milliseconds). It's *not* a “date-only” type.
+- It is **mutable** and has confusing APIs; prefer `java.time` in your domain model.
+- Use `Date` only for interop with old libraries/frameworks, then convert immediately:
+
+```java
+import java.time.Instant;
+import java.util.Date;
+
+Instant now = Instant.now();
+
+// java.time -> legacy
+Date legacy = Date.from(now);
+
+// legacy -> java.time
+Instant instant = legacy.toInstant();
+```
+
+______________________________________________________________________
 
 ## How to use (examples)
 
@@ -46,7 +65,7 @@ Typical use cases:
 - `LocalDate`: “show available slots for **a day**”
 - `LocalTime`: “working hours start at **09:00**”
 
----
+______________________________________________________________________
 
 ### Example 2 — “moment in time” for storage + comparisons (`Instant`)
 
@@ -67,7 +86,7 @@ Why `Instant` helps:
 - easy ordering/comparison
 - avoids DST/timezone surprises when persisted
 
----
+______________________________________________________________________
 
 ### Example 3 — API-friendly timestamps (`OffsetDateTime`)
 
@@ -88,7 +107,7 @@ import java.time.OffsetDateTime;
 Instant startUtc = start.toInstant();
 ```
 
----
+______________________________________________________________________
 
 ### Example 4 — business rules in a named timezone (`ZonedDateTime` + `ZoneId`)
 
@@ -123,7 +142,7 @@ Instant firstSlotUtc = firstSlot.toInstant();
 Instant lastSlotUtc  = lastSlot.toInstant();
 ```
 
----
+______________________________________________________________________
 
 ### Example 5 — avoid `LocalDateTime` for persistence (ambiguity)
 
@@ -140,7 +159,7 @@ ZoneId zone = ZoneId.of("America/Sao_Paulo");
 Instant utc = wallClock.atZone(zone).toInstant();
 ```
 
----
+______________________________________________________________________
 
 ### Example 6 — durations vs periods (time vs calendar)
 
@@ -157,7 +176,7 @@ Period reminderLead = Period.ofDays(1);
 LocalDate tomorrow = LocalDate.of(2026, 3, 2).plus(reminderLead);
 ```
 
----
+______________________________________________________________________
 
 ### Example 7 — formatting/parsing with `DateTimeFormatter` (stable output)
 
@@ -171,20 +190,21 @@ String iso = start.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME);
 // 2026-03-02T14:30:00-03:00
 ```
 
----
+______________________________________________________________________
 
 ## Practical guidance for scheduling APIs
 
 1. **Persist UTC Instants** in DB (`TIMESTAMP WITH TIME ZONE` in Postgres maps nicely, but even if your column is naive, store UTC consistently).
-2. Keep a **ZoneId** for the business (or per-location/professional): `America/Sao_Paulo`, not `GMT-3`.
-3. Generate available slots using `ZonedDateTime` in that zone, then convert to `Instant` for conflict checks.
-4. Prefer returning `OffsetDateTime` in APIs if clients care about offset; otherwise return `Instant` and let clients render.
+1. Keep a **ZoneId** for the business (or per-location/professional): `America/Sao_Paulo`, not `GMT-3`.
+1. Generate available slots using `ZonedDateTime` in that zone, then convert to `Instant` for conflict checks.
+1. Prefer returning `OffsetDateTime` in APIs if clients care about offset; otherwise return `Instant` and let clients render.
 
----
+______________________________________________________________________
 
 ## Links
 
 - `java.time` package summary: https://docs.oracle.com/javase/8/docs/api/java/time/package-summary.html
+- `java.util.Date`: https://docs.oracle.com/javase/8/docs/api/java/util/Date.html
 - `LocalDate`: https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html
 - `Instant`: https://docs.oracle.com/javase/8/docs/api/java/time/Instant.html
 - `OffsetDateTime`: https://docs.oracle.com/javase/8/docs/api/java/time/OffsetDateTime.html

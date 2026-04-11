@@ -48,6 +48,19 @@ Run maven project
 mvn spring-boot:run
 ```
 
+run flyway repair
+
+```bash
+./mvnw -Dflyway.url=jdbc:postgresql://localhost:5433/cxhub -Dflyway.user=postgres -Dflyway.password=postgres org.flywaydb:flyway-maven-plugin:11.7.2:repair
+
+```
+
+run flyway migrate
+
+```bash
+./mvnw -Dflyway.url=jdbc:postgresql://localhost:5433/cxhub -Dflyway.user=postgres -Dflyway.password=postgres -Dflyway.outOfOrder=true org.flywaydb:flyway-maven-plugin:11.7.2:migrate
+```
+
 Kill process by port
 
 ```bash
@@ -68,6 +81,38 @@ Restore mongo docker backup
 ```bash
 docker cp ~/Downloads/assethub-aas-dev mongo:/tmp/assethub-aas-dev
 docker exec -it mongo mongorestore --db=assethub-aas-dev /tmp/assethub-aas-dev
+```
+
+run postgres docker container
+
+```bash
+docker run --name pg \
+  -e MYSQL_ROOT_PASSWORD=postgres \
+  -e MYSQL_DATABASE=postgres \
+  -p 5432:5432 \
+  -d postgres:16
+```
+
+run mysql docker container
+
+```bash
+docker run --name mysql \
+  -e MYSQL_ROOT_PASSWORD=mysql \
+  -e MYSQL_DATABASE=mysql \
+  -p 3306:3306 \
+  -d mysql:8
+```
+
+enter mysql container
+
+```bash
+docker exec -it mysql mysql -uroot -pmysql mysql 
+```
+
+enter mariadb container
+
+```bash
+docker exec -it mariadb mariadb -uroot -proot
 ```
 
 ```bash

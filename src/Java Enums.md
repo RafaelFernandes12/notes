@@ -3,7 +3,7 @@
 ______________________________________________________________________
 
 **Date:** 2026-03-02
-**Tags:** [Java](../tags/Java.md), [Enums](../tags/Enums.md), [Types](../tags/Types.md), [Spring_Boot](../tags/Spring_Boot.md), [Rest](../tags/Rest.md), [BancoDeDados](../tags/BancoDeDados.md)
+**Tags:** [Java](../tags/Java.md), [Enums](../tags/Enums.md), [Types](../tags/Types.md), [Spring_Boot](../tags/Spring_Boot.md)
 **URL:** https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-8.9
 
 ______________________________________________________________________
@@ -18,7 +18,7 @@ Key properties:
 - enums can have **fields, methods, and constructors**
 - enums are great for **domain states** (status, role, type) and reduce “stringly-typed” code
 
----
+______________________________________________________________________
 
 ## How to use (examples)
 
@@ -42,7 +42,7 @@ public enum AppointmentStatus {
 }
 ```
 
----
+______________________________________________________________________
 
 ### Example 2 — per-constant behavior (strategy)
 
@@ -67,7 +67,7 @@ public enum DiscountPolicy {
 
 This replaces `if/else` or `switch` chains with polymorphism.
 
----
+______________________________________________________________________
 
 ### Example 3 — enums in Spring Boot REST (binding + validation)
 
@@ -90,7 +90,7 @@ class NotificationController {
 }
 ```
 
----
+______________________________________________________________________
 
 ### Example 4 — enums with JPA: `EnumType.STRING` vs `ORDINAL`
 
@@ -109,7 +109,7 @@ class Appointment {
 
 Prefer `EnumType.STRING` so reordering enum constants won’t change stored meaning.
 
----
+______________________________________________________________________
 
 ## Practical tips
 
@@ -134,7 +134,7 @@ public enum AppointmentStatus {
 }
 ```
 
----
+______________________________________________________________________
 
 ## Links
 
