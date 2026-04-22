@@ -4,3 +4,7 @@
 - [Forensics Data Representation Basics — Number Systems, ASCII, Time, Endianness](../src/Forensics%20Data%20Representation%20Basics%20%E2%80%94%20Number%20Systems%2C%20ASCII%2C%20Time%2C%20Endianness.md)
 - [Spring Beans (IoC Container and Dependency Injection)](../src/Spring%20Beans%20%28IoC%20Container%20and%20Dependency%20Injection%29.md)
 - [JWT Bearer Authentication (Spring Boot + Spring Security)](../src/JWT%20Bearer%20Authentication%20%28Spring%20Boot%20%2B%20Spring%20Security%29.md)
+- [Fundamentos de Investigação e Técnicas de Forense Computacional](../src/Fundamentos de Investigação e Técnicas de Forense Computacional.md)
+- [Legislação Aplicada à Forense Computacional](../src/Legislação Aplicada à Forense Computacional.md)
+- [Laboratórios e Estações de Trabalho em Computação Forense](../src/Laboratórios e Estações de Trabalho em Computação Forense.md)
+- [Políticas de Segurança da Informação](../src/Políticas de Segurança da Informação.md)

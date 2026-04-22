@@ -2,3 +2,4 @@
 - [System Packages vs Python Packages (DNF vs pip)](../src/System%20Packages%20vs%20Python%20Packages%20%28DNF%20vs%20pip%29.md)
 - [Python -m (Running Modules) and pip](../src/Python%20-m%20%28Running%20Modules%29%20and%20pip.md)
 - [Forensics Data Representation Basics — Number Systems, ASCII, Time, Endianness](../src/Forensics%20Data%20Representation%20Basics%20%E2%80%94%20Number%20Systems%2C%20ASCII%2C%20Time%2C%20Endianness.md)
+- [Aquisição de Dados e Imagens Forenses](../src/Aquisição de Dados e Imagens Forenses.md)

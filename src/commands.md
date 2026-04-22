@@ -93,6 +93,13 @@ docker run --name pg \
   -d postgres:16
 ```
 
+run rabbitmq docker container
+
+```bash
+docker run -d --name rabbitmq \
+  -p 5672:5672 -p 15672:15672 rabbitmq:3-management
+```
+
 run mysql docker container
 
 ```bash
