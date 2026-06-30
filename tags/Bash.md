@@ -4,3 +4,4 @@
 - [Python -m (Running Modules) and pip](../src/Python%20-m%20%28Running%20Modules%29%20and%20pip.md)
 - [Python venv and requirements.txt](../src/Python%20venv%20and%20requirements.txt.md)
 - [Forensics Data Representation Basics — Number Systems, ASCII, Time, Endianness](../src/Forensics%20Data%20Representation%20Basics%20%E2%80%94%20Number%20Systems%2C%20ASCII%2C%20Time%2C%20Endianness.md)
+- [PostgreSQL CLI (psql) Navigation](../src/PostgreSQL%20CLI%20%28psql%29%20Navigation.md)

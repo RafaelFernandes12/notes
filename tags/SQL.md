@@ -4,3 +4,8 @@
 - [JPA One-to-Many and Many-to-One (Associations)](../src/JPA%20One-to-Many%20and%20Many-to-One%20%28Associations%29.md)
 - [Modelagem de Dados - Entidades, Componentes, Tabelas e Relacionamentos](../src/Modelagem%20de%20Dados%20-%20Entidades%2C%20Componentes%2C%20Tabelas%20e%20Relacionamentos.md)
 - [JPA vs Hibernate (Differences and When to Use Each)](../src/JPA%20vs%20Hibernate%20%28Differences%20and%20When%20to%20Use%20Each%29.md)
+- [PostgreSQL CLI (psql) Navigation](../src/PostgreSQL%20CLI%20%28psql%29%20Navigation.md)
+- [Algebra Relacional - Resumo para Prova](../src/Algebra%20Relacional%20-%20Resumo%20para%20Prova.md)
+- [Mapeamento ER para Modelo Relacional - Regras Base](../src/Mapeamento%20ER%20para%20Modelo%20Relacional%20-%20Regras%20Base.md)
+- [Mapeamento ER Avancado - N-arios e Especializacao](../src/Mapeamento%20ER%20Avancado%20-%20N-arios%20e%20Especializacao.md)
+- [Banco de Dados - Revisao Geral da Prova](../src/Banco%20de%20Dados%20-%20Revisao%20Geral%20da%20Prova.md)

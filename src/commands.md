@@ -116,6 +116,12 @@ enter mysql container
 docker exec -it mysql mysql -uroot -pmysql mysql 
 ```
 
+enter postgres container
+
+```bash
+docker exec -it postgres psql -U postgres
+```
+
 enter mariadb container
 
 ```bash
