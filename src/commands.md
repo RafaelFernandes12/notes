@@ -51,14 +51,14 @@ mvn spring-boot:run
 run flyway repair
 
 ```bash
-./mvnw -Dflyway.url=jdbc:postgresql://localhost:5433/cxhub -Dflyway.user=postgres -Dflyway.password=postgres org.flywaydb:flyway-maven-plugin:11.7.2:repair
+./mvnw -Dflyway.url=jdbc:postgresql://localhost:5432/cxhub -Dflyway.user=postgres -Dflyway.password=postgres org.flywaydb:flyway-maven-plugin:11.7.2:repair
 
 ```
 
 run flyway migrate
 
 ```bash
-./mvnw -Dflyway.url=jdbc:postgresql://localhost:5433/cxhub -Dflyway.user=postgres -Dflyway.password=postgres -Dflyway.outOfOrder=true org.flywaydb:flyway-maven-plugin:11.7.2:migrate
+./mvnw -Dflyway.url=jdbc:postgresql://localhost:5432/cxhub -Dflyway.user=postgres -Dflyway.password=postgres -Dflyway.outOfOrder=true org.flywaydb:flyway-maven-plugin:11.7.2:migrate
 ```
 
 Kill process by port
