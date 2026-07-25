@@ -32,13 +32,6 @@ so ciencia da computacao, vai dar em nada
 https://www.metropoledigital.ufrn.br/portal/visualizar/856
 
 
-### Edital | 001/2026 - PROJETO AIPIM/AUTOMOBILE
-
-![anexo 2 2](../assets/anexo%202%202.png)
-
-https://www.metropoledigital.ufrn.br/portal/visualizar/858
-
-
 ## Linkedin
 
 ### MAPA.SA Consultoria Socioambiental - 02/07/2026
