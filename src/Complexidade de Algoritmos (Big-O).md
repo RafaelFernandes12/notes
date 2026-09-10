@@ -8,24 +8,12 @@ ______________________________________________________________________
 **Assets:** https://drive.google.com/file/d/10g0wq114SJoKAea6DZ2hYEAmZ90ibV5N/view
 **URL:**
 
-- https://en.wikipedia.org/wiki/Big_O_notation
-- https://cp-algorithms.com/complexity/complexity.html
-- https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/ (CLRS)
 
 ______________________________________________________________________
 
 ## O que é (ideia)
 
 **Complexidade** descreve como o consumo de recursos de um algoritmo cresce com o tamanho da entrada `n`.
-
-Na prática, a gente quase sempre discute **complexidade de tempo** (quantos “passos”/operações o algoritmo executa) e usa uma **cota assintótica** (ex.: `O(n)`, `O(n²)`, `O(log n)`), focando no que domina quando `n` fica grande.
-
-Dois pontos importantes (bem no espírito do PDF):
-
-1. **Muitos algoritmos resolvem o mesmo problema**, mas podem ser inviáveis para entradas grandes (crescimento explode).
-1. A análise pode ser feita:
-   - **Experimental**: medir tempo real rodando o código (depende de máquina/linguagem/otimizações).
-   - **Analítica**: contar passos e obter uma função `t(n)` que cresce com `n`.
 
 ## Como usar (o “como”): ideia de contar passos e simplificar
 
@@ -38,120 +26,46 @@ Depois, para comparar algoritmos, normalmente simplificamos:
 
 Isso leva à ordem de crescimento (ex.: `O(n)`, `O(n²)`).
 
-## Casos: melhor, pior e médio
 
-O mesmo algoritmo pode ter comportamentos diferentes dependendo da entrada.
+## Tempos comuns
 
-- **Melhor caso**: menor número de passos para entradas de tamanho `n`.
-- **Pior caso**: maior número de passos (muito usado porque dá garantia).
-- **Caso médio**: valor esperado, depende de hipóteses de probabilidade sobre as entradas.
+### O(1)
 
-### Exemplo 1 — Busca sequencial (linear search)
+Independente do tamanho do input, a complexidade de tempo permanecerá a mesma.
+Se o input é de 10, 100 ou 100.000.000, o tempo de execução será igual.
+Isso independente do tempo de execução, se o tempo de execução for 10_000 anos com o input de 1, e com o input de 1.000.000, continuará sendo O(1)
+A mesma lógica se aplica a complexidade espacial.
+* Exemplo: Achar o primeiro elemento do array
 
-Problema: achar `x` em um array `A`.
+### logn
+A cada iteração, o intervalo cai pela metade ⇒ `O(log n)`.
+Para O(log n), enquanto o input aumenta exponencialmente, o tempo de execução aumenta linearmente, ou seja.
 
-```js
-function buscaSequencial(A, x) {
-  for (let i = 0; i < A.length; i++) {
-    if (A[i] === x) return i;
-  }
-  return -1;
-}
-```
+log2 (10) -> 3.32
+log2 (20) -> 4.32
+log2 (40) -> 5.32
+* Exemplo: binary search
 
-Análise (pela ideia do PDF: contar comparações `A[i] === x`):
+### O(N)
 
-- **Melhor caso**: `x` está na primeira posição ⇒ 1 comparação ⇒ `O(1)`.
-- **Pior caso**: `x` está na última posição (ou não está) ⇒ ~`n` comparações ⇒ `O(n)`.
-- **Caso médio** (hipótese comum: `x` está no array e posições equiprováveis):
-  - comparações esperadas ≈ `(n + 1) / 2` ⇒ ainda é `Θ(n)` (cresce linearmente).
+Ele escala exatamente na mesma medida que o input aumenta, 10 input, 10 de execução, 1.000.000 input, 1.000.000 de execução.
+* Exemplo: busca simples
 
-## Padrões rápidos para identificar complexidade
+### O (N Logn)
 
-Esses “atalhos” evitam contar linha a linha em muitos casos:
+Explicar matematicamente isso é muito complexo, reze pra que ninguem pergunte
+Basicamente, no caso do merge sort, ele percorre o array em O(N), e ele divide o array em O(log n)
 
-### 1) Sem laços/recursão ⇒ constante
+Exemplo: Sorting(quicksort, mergesort), divide and conquer
 
-```js
-function isPar(x) {
-  return x % 2 === 0; // O(1)
-}
-```
+### O (N^2)
 
-### 2) Um laço que vai até `n` ⇒ linear
+Quando percorre o array duas vezes.
+for dentro de for, é O(n^2).
 
-```js
-function soma(A) {
-  let s = 0;
-  for (let i = 0; i < A.length; i++) s += A[i];
-  return s; // O(n)
-}
-```
-
-### 3) Dois laços “cheios” até `n` ⇒ quadrática
-
-Ex.: gerar todos os pares `(i, j)`.
-
-```js
-function todosOsPares(n) {
-  const pairs = [];
-  for (let i = 0; i < n; i++) {
-    for (let j = 0; j < n; j++) {
-      pairs.push([i, j]);
-    }
-  }
-  return pairs; // O(n^2)
-}
-```
-
-### 4) Laço interno depende do externo (triangular) ⇒ ainda quadrática
-
-Ex.: `j < i` dá aproximadamente `n(n-1)/2` iterações.
-
-```js
-function paresTriangulares(n) {
-  let count = 0;
-  for (let i = 0; i < n; i++) {
-    for (let j = 0; j < i; j++) {
-      count++;
-    }
-  }
-  return count; // O(n^2)
-}
-```
-
-### 5) “Dividir por 2 a cada passo” ⇒ logarítmica
-
-Exemplo típico: **busca binária** (array ordenado).
-
-```js
-function buscaBinaria(A, x) {
-  let lo = 0, hi = A.length - 1;
-  while (lo <= hi) {
-    const mid = lo + Math.floor((hi - lo) / 2);
-    if (A[mid] === x) return mid;
-    if (A[mid] < x) lo = mid + 1;
-    else hi = mid - 1;
-  }
-  return -1;
-}
-```
-
-- A cada iteração, o intervalo cai pela metade ⇒ `O(log n)`.
 
 ## Tabela mental (ordem típica)
 
 Do “cresce pouco” ao “explode rápido”:
 
 `O(1)` < `O(log n)` < `O(n)` < `O(n log n)` < `O(n²)` < `O(2^n)` < `O(n!)`
-
-## Dicas práticas
-
-- Quando comparar algoritmos, pergunte: **qual é o termo dominante?**
-  - `2n + 4` e `100n` são ambos “lineares” ⇒ `O(n)`.
-  - `n² + 10n + 50` é “quadrático” ⇒ `O(n²)`.
-- Sempre declare **qual caso** você está analisando (melhor/pior/médio) e quais hipóteses (ex.: array ordenado, distribuição de entradas).
-
-## Referência usada
-
-- Slides: “Complexidade de Algoritmos”, Jorge E. S. Souza (PDF fornecido).

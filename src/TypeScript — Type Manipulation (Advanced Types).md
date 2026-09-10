@@ -26,6 +26,7 @@ In TypeScript, a **type** is (mostly) a _compile-time_ description of values.
 
 ```ts
 export type UserType = Awaited<ReturnType<FindUserService["execute"]>>;
+export type UserType = Awaited<ReturnType<FindUserService["execute"]>>[number]; // pra pegar sem a lista
 ```
 
 Why this is useful:
