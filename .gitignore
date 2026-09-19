@@ -1,1 +1,8 @@
 node_modules
+
+# Executáveis compilados
+src/code/c/dist/
+*.o
+*.out
+*.exe
+

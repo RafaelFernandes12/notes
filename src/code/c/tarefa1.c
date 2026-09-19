@@ -53,3 +53,14 @@ int main() {
 
   return 0;
 }
+/*
+  A função de multiplicar_linhas será consideravelmente mais rápido que a de
+  multiplicar_colunas poís linguagens como c armazenam o array por meio de
+  sequências de memórias, [1,2,3,4,5], os elementos desse array estão um do lado
+  do outro na mémoria.
+  Com isso em mente, o motivo de multiplicar por linhas é mais rápido porque
+  quando nós multiplicamos por linha, toda a linha é armazenada na memoria
+  cache, que é bem mais rápida que a memoria ram, quando nos tentamos
+  multipliciar por coluna, o computador não tem o valor da coluna na cache,
+  então ele tem o overhead de ir procurar na memoria ram, o que é bem lento
+*/

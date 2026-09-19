@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-long n = 1000000000;
+long n = 2000000000;
 
 void populateArray(long vetor[n]) {
   for (long i = 0; i < n; i++) {
@@ -53,3 +53,25 @@ int main() {
 
   return 0;
 }
+
+/*
+~/source/notes/src/code/c main* ❯ ./run.sh  tarefa2.c
+for simples:  16.154748 2000000000
+for complexo:  6.857718 2000000000
+
+~/source/notes/src/code/c main* ❯ ./run.sh -O2 tarefa2.c
+for simples:  2.169187 2000000000
+for complexo:  1.629141 2000000000
+
+~/source/notes/src/code/c main* ❯ ./run.sh -O3 tarefa2.c
+for simples:  1.838011 2000000000
+for complexo:  1.920467 2000000000
+
+Conforme podemos ver, o for simples é consideravelmente mais lento sem a
+otimização do compilador, isso ocorre por que o for complexo faz menos
+interações, no caso de 4 em 4, enquanto o for simples é sequencial, a proxima
+interação depende do resultado da variável soma da ultima interação Com as
+otimizações O2, o compilador tem liberdade para fazer algumas otimizações, entre
+elas estão o loop unroling, software pipeline e vetorização.
+
+*/

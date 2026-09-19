@@ -11,7 +11,7 @@ void sequencial(double a, double b, int n, double h) {
     double x = a + i * h;
     soma += f(x);
   }
-  double resultado = h * ((f(a) + f(b) / 2.0 + soma));
+  double resultado = h * ((f(a) + f(b)) / 2.0 + soma);
 
   double fim = omp_get_wtime();
   printf("resultado da integral: %f\n", resultado);
