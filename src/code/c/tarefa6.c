@@ -113,7 +113,7 @@ int main() {
   sequencial > parallelFor > parallelForAtomic > ParallelForCritical
 
   Isso ocorre por que o reduction cria uma copia da variável soma para cada uma
-  das threads e ao fim soma todas elas, uma opção bastante parada e não trava
+  das threads e ao fim soma todas elas, uma opção bastante barada e não trava
   nenhuma cpu, 0 overhead.
 
   O sequencial vem logo em seguida por que essa não é uma operação que demanda

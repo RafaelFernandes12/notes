@@ -140,9 +140,4 @@ int main(void) {
   quando ela terminar a execução do single, ela irá também executar o for. Ao
   fim vem o single novamente para imprimir o resultado, a primeira thread que
   chegar ali após a finalização do for, irá printar o resultado.
-
-
-
-
-
 */
