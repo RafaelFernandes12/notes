@@ -67,7 +67,7 @@ int contarLastprivate(int n) {
 
 int contarFirstLastprivate(int n) {
   int contador = 0;
-#pragma omp parallel for num_threads(NUM_THREADS) firstprivate(contador)   \
+#pragma omp parallel for num_threads(NUM_THREADS) firstprivate(contador)       \
     lastprivate(contador)
   for (int i = 2; i <= n; i++) {
     if (ehPrimo(i))
@@ -82,7 +82,7 @@ int contarFirstLastprivate(int n) {
 
 int contarDefaultNone(int n) {
   int contador = 0;
-#pragma omp parallel for num_threads(NUM_THREADS) default(none) shared(n)  \
+#pragma omp parallel for num_threads(NUM_THREADS) default(none) shared(n)      \
     reduction(+ : contador)
   for (int i = 2; i <= n; i++) {
     if (ehPrimo(i))
@@ -117,7 +117,7 @@ int contarReduction(int n) {
 
 int contarScheduleStatic(int n) {
   int contador = 0;
-#pragma omp parallel for num_threads(NUM_THREADS) reduction(+ : contador)  \
+#pragma omp parallel for num_threads(NUM_THREADS) reduction(+ : contador)      \
     schedule(static)
   for (int i = 2; i <= n; i++)
     if (ehPrimo(i))
@@ -127,7 +127,7 @@ int contarScheduleStatic(int n) {
 
 int contarScheduleDynamic(int n) {
   int contador = 0;
-#pragma omp parallel for num_threads(NUM_THREADS) reduction(+ : contador)  \
+#pragma omp parallel for num_threads(NUM_THREADS) reduction(+ : contador)      \
     schedule(dynamic)
   for (int i = 2; i <= n; i++)
     if (ehPrimo(i))
@@ -137,7 +137,7 @@ int contarScheduleDynamic(int n) {
 
 int contarScheduleGuided(int n) {
   int contador = 0;
-#pragma omp parallel for num_threads(NUM_THREADS) reduction(+ : contador)  \
+#pragma omp parallel for num_threads(NUM_THREADS) reduction(+ : contador)      \
     schedule(guided)
   for (int i = 2; i <= n; i++)
     if (ehPrimo(i))
@@ -147,7 +147,7 @@ int contarScheduleGuided(int n) {
 
 int contarScheduleAuto(int n) {
   int contador = 0;
-#pragma omp parallel for num_threads(NUM_THREADS) reduction(+ : contador)  \
+#pragma omp parallel for num_threads(NUM_THREADS) reduction(+ : contador)      \
     schedule(auto)
   for (int i = 2; i <= n; i++)
     if (ehPrimo(i))
@@ -157,7 +157,7 @@ int contarScheduleAuto(int n) {
 
 int contarScheduleRuntime(int n) {
   int contador = 0;
-#pragma omp parallel for num_threads(NUM_THREADS) reduction(+ : contador)  \
+#pragma omp parallel for num_threads(NUM_THREADS) reduction(+ : contador)      \
     schedule(runtime)
   for (int i = 2; i <= n; i++)
     if (ehPrimo(i))
