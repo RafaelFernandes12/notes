@@ -1,0 +1,3 @@
+Condição de corrida é quando duas ou mais [[threads]] tentam ler e escrever simultâneamente uma mesma variável e o resultado dessa computação depende da ordem de execução das threads.
+Para resolver esse problema, compartilhamos a memória entre elas, uma forma de fazer isso é por meio de mecanismos de [[Síncronização por exclusão mútua]].
+A sincronização por exclusão mútua visa garantir que os trechos de código em cada thread, acessando variáveis compartilhadas, não sejam executados ao mesmo tempo. Essa restrição é necessária para evitar a inconsistência nos valores das variáveis compartilhadas
