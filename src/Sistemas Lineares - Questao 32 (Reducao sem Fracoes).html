@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Redução sem frações — Questão 32 (Anton/Rorres, seção 1.2)</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --fg: #1a1a1a;
+    --muted: #5a5a5a;
+    --accent: #1d4ed8;
+    --border: #d9dee6;
+    --panel: #f6f8fb;
+    --pivot: #dbeafe;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14171c;
+      --fg: #e8eaed;
+      --muted: #9aa4b2;
+      --accent: #6ea8fe;
+      --border: #2b3038;
+      --panel: #1b1f26;
+      --pivot: #24344d;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 32px 16px 64px;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.55;
+  }
+  main { max-width: 760px; margin: 0 auto; }
+  h1 { font-size: 1.5rem; margin-bottom: 4px; }
+  .subtitle { color: var(--muted); font-size: 0.95rem; margin-bottom: 28px; }
+  h2 {
+    font-size: 1.1rem;
+    margin-top: 36px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 6px;
+  }
+  .step { margin: 18px 0; }
+  .step .label { font-weight: 600; color: var(--accent); margin-bottom: 6px; font-size: 0.95rem; }
+  table.matrix {
+    border-collapse: collapse;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.95rem;
+    background: var(--panel);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  table.matrix td {
+    padding: 6px 10px;
+    text-align: right;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  table.matrix tr td:first-child { border-left: 2px solid var(--fg); }
+  table.matrix tr td:last-child { border-right: 2px solid var(--fg); }
+  table.matrix.pivoted td.pivot { background: var(--pivot); font-weight: 700; border-radius: 4px; }
+  .note { color: var(--muted); font-size: 0.9rem; margin-top: 6px; }
+  .answer-box {
+    background: var(--panel);
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    padding: 16px 20px;
+    font-size: 1.05rem;
+  }
+  ul, ol { padding-left: 22px; }
+  code { font-family: "SFMono-Regular", Consolas, monospace; background: var(--panel); padding: 1px 5px; border-radius: 4px; }
+  footer {
+    margin-top: 48px;
+    color: var(--muted);
+    font-size: 0.82rem;
+    border-top: 1px solid var(--border);
+    padding-top: 12px;
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1>Questão 32 — Redução à forma escalonada reduzida sem frações</h1>
+  <div class="subtitle">Anton &amp; Rorres, <em>Álgebra Linear com Aplicações</em> (10ª ed.) — Conjunto de exercícios 1.2, página 24</div>
+
+  <h2>Enunciado</h2>
+  <p>Reduza a matriz abaixo à forma escalonada reduzida <strong>sem introduzir frações em estágios intermediários</strong>:</p>
+  <table class="matrix">
+    <tr><td>2</td><td>1</td><td>3</td></tr>
+    <tr><td>0</td><td>−2</td><td>−29</td></tr>
+    <tr><td>3</td><td>4</td><td>5</td></tr>
+  </table>
+  <p class="note">Não é uma matriz aumentada — é só uma matriz de coeficientes, sem sistema associado. Como não é quadrada singular (o determinante é 143, ou seja, diferente de zero), a forma escalonada reduzida dela vai ser a matriz identidade 3×3.</p>
+
+  <h2>A técnica: eliminação cruzada</h2>
+  <p class="note">Em vez de <code>L&#8322; ← L&#8322; − (a/b)L&#8321;</code> (que gera fração quando a/b não é inteiro), uso <code>L&#8322; ← b·L&#8322; − a·L&#8321;</code>: escalo a linha inteira antes de subtrair. Isso é só compor duas operações elementares válidas (multiplicar uma linha por escalar não-nulo, depois somar múltiplo de outra) — o resultado continua sendo uma matriz linha-equivalente à original.</p>
+
+  <h2>Passo a passo</h2>
+
+  <div class="step">
+    <div class="label">Passo 1 — L3 ← 2·L3 − 3·L1</div>
+    <p class="note">Elimino a coluna 1 na linha 3. Uso o coeficiente da linha 1 (2) para escalar L3, e o da linha 3 (3) para escalar L1, cancelando exatamente: 2·3 − 3·2 = 0.</p>
+    <table class="matrix pivoted">
+      <tr><td class="pivot">2</td><td>1</td><td>3</td></tr>
+      <tr><td>0</td><td>−2</td><td>−29</td></tr>
+      <tr><td>0</td><td>5</td><td>1</td></tr>
+    </table>
+  </div>
+
+  <div class="step">
+    <div class="label">Passo 2 — L3 ← 2·L3 + 5·L2</div>
+    <p class="note">Elimino a coluna 2 na linha 3, usando o pivô da linha 2 (−2) e o coeficiente da linha 3 (5): 2·5 + 5·(−2) = 0.</p>
+    <table class="matrix pivoted">
+      <tr><td>2</td><td>1</td><td>3</td></tr>
+      <tr><td class="pivot">0</td><td>−2</td><td>−29</td></tr>
+      <tr><td>0</td><td>0</td><td>−143</td></tr>
+    </table>
+    <p class="note">Matriz triangular superior, toda em números inteiros — essa já seria a forma escalonada "de Gauss". Agora sigo eliminando pra cima, pra chegar na forma <em>reduzida</em> (Gauss-Jordan).</p>
+  </div>
+
+  <div class="step">
+    <div class="label">Passo 3 — L1 ← 143·L1 + 3·L3,&nbsp; L2 ← 143·L2 − 29·L3</div>
+    <p class="note">Elimino a coluna 3 nas linhas 1 e 2 usando o pivô da linha 3 (−143). Em L1: 143·3 + 3·(−143) = 0. Em L2: 143·(−29) − 29·(−143) = 0.</p>
+    <table class="matrix pivoted">
+      <tr><td>286</td><td>143</td><td>0</td></tr>
+      <tr><td>0</td><td>−286</td><td>0</td></tr>
+      <tr><td class="pivot">0</td><td>0</td><td>−143</td></tr>
+    </table>
+  </div>
+
+  <div class="step">
+    <div class="label">Passo 4 — L1 ← 2·L1 + L2</div>
+    <p class="note">Elimino a coluna 2 na linha 1. Como −286 é múltiplo exato de 143 (−286 = 2·(−143)), aqui já dá pra usar um multiplicador simples: 2·143 + 1·(−286) = 0.</p>
+    <table class="matrix pivoted">
+      <tr><td class="pivot">572</td><td>0</td><td>0</td></tr>
+      <tr><td class="pivot">0</td><td>−286</td><td>0</td></tr>
+      <tr><td class="pivot">0</td><td>0</td><td>−143</td></tr>
+    </table>
+    <p class="note">Matriz diagonal, ainda 100% inteira — nenhuma fração apareceu em nenhum estágio intermediário.</p>
+  </div>
+
+  <div class="step">
+    <div class="label">Passo 5 — normalizar: L1 ← L1/572, L2 ← L2/(−286), L3 ← L3/(−143)</div>
+    <p class="note">Único momento em que "divido" — mas cada linha é dividida exatamente pelo seu próprio pivô, o que dá sempre 1, nunca uma fração de verdade.</p>
+  </div>
+
+  <h2>Resultado final</h2>
+  <div class="answer-box">
+    <table class="matrix" style="background:transparent;border:none;">
+      <tr><td>1</td><td>0</td><td>0</td></tr>
+      <tr><td>0</td><td>1</td><td>0</td></tr>
+      <tr><td>0</td><td>0</td><td>1</td></tr>
+    </table>
+  </div>
+  <p class="note">Faz sentido: como a matriz é quadrada e invertível (determinante = 143 ≠ 0), sua forma escalonada reduzida é sempre a matriz identidade — o que o exercício está realmente testando é a técnica de chegar lá sem sujar a conta com frações pelo caminho.</p>
+
+  <h2>Verificação</h2>
+  <p class="note">Conferi por eliminação "normal" (com frações) em paralelo: normalizando cada pivô a cada passo (2, depois −2, depois −35,75) e fazendo a substituição/eliminação de volta, chega-se exatamente na mesma matriz identidade — confirmando que o caminho sem frações é apenas um atalho aritmético, não muda o resultado.</p>
+
+  <footer>
+    Álgebra Linear com Aplicações, 10ª edição — Howard Anton &amp; Chris Rorres. Conjunto de exercícios 1.2 (Eliminação gaussiana), página 24. Exercício sem resposta numérica no gabarito (é um exercício de método/procedimento).
+  </footer>
+</main>
+</body>
+</html>
