@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Inversão de matriz — Questão 5 (Anton/Rorres, seção 1.6)</title>
+<style>
+  :root {
+    --bg: #ffffff; --fg: #1a1a1a; --muted: #5a5a5a; --accent: #1d4ed8;
+    --border: #d9dee6; --panel: #f6f8fb; --pivot: #dbeafe;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14171c; --fg: #e8eaed; --muted: #9aa4b2; --accent: #6ea8fe;
+      --border: #2b3038; --panel: #1b1f26; --pivot: #24344d;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; padding:32px 16px 64px; background:var(--bg); color:var(--fg);
+    font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; line-height:1.55; }
+  main { max-width:760px; margin:0 auto; }
+  h1 { font-size:1.5rem; margin-bottom:4px; }
+  .subtitle { color:var(--muted); font-size:0.95rem; margin-bottom:28px; }
+  h2 { font-size:1.1rem; margin-top:36px; margin-bottom:10px; border-bottom:1px solid var(--border); padding-bottom:6px; }
+  .system { font-family:"Cambria Math",Cambria,Georgia,serif; font-size:1.05rem; background:var(--panel);
+    border:1px solid var(--border); border-radius:8px; padding:16px 20px; display:inline-block; }
+  .system div { white-space:nowrap; }
+  .step { margin:18px 0; }
+  .step .label { font-weight:600; color:var(--accent); margin-bottom:6px; font-size:0.95rem; }
+  table.matrix {
+    border-collapse:collapse; font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;
+    font-size:0.95rem; background:var(--panel); border-radius:6px; overflow:hidden;
+  }
+  table.matrix td { padding:6px 10px; text-align:right; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+  table.matrix tr td:first-child { border-left:2px solid var(--fg); }
+  table.matrix tr td.sep { border-left:1px dashed var(--border); }
+  table.matrix tr td:last-child { border-right:2px solid var(--fg); }
+  table.matrix.pivoted td.pivot { background:var(--pivot); font-weight:700; border-radius:4px; }
+  .note { color:var(--muted); font-size:0.9rem; margin-top:6px; }
+  .answer-box { background:var(--panel); border:1px solid var(--accent); border-radius:8px; padding:16px 20px; font-size:1.05rem; }
+  .book-quote { border-left:3px solid var(--accent); padding:10px 16px; background:var(--panel); border-radius:0 6px 6px 0; font-family:"SFMono-Regular",Consolas,monospace; }
+  ul, ol { padding-left:22px; }
+  code { font-family:"SFMono-Regular",Consolas,monospace; background:var(--panel); padding:1px 5px; border-radius:4px; }
+  footer { margin-top:48px; color:var(--muted); font-size:0.82rem; border-top:1px solid var(--border); padding-top:12px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Questão 5 — Resolvendo pela inversa da matriz de coeficientes</h1>
+  <div class="subtitle">Anton &amp; Rorres, <em>Álgebra Linear com Aplicações</em> (10ª ed.) — Conjunto de exercícios 1.6, página 65</div>
+
+  <h2>Enunciado</h2>
+  <div class="system">
+    <div>x + y + &nbsp;z &nbsp;= &nbsp;5</div>
+    <div>x + y − 4z &nbsp;= 10</div>
+    <div>−4x + y + &nbsp;z &nbsp;= &nbsp;0</div>
+  </div>
+  <p class="note">De novo, o pedido é resolver via Teorema 1.6.2: x = A⁻¹b.</p>
+
+  <h2>Passo 1 — montar A e b</h2>
+  <table class="matrix">
+    <tr><td>1</td><td>1</td><td>1</td></tr>
+    <tr><td>1</td><td>1</td><td>−4</td></tr>
+    <tr><td>−4</td><td>1</td><td>1</td></tr>
+  </table>
+  <p class="note">A = matriz acima,&nbsp; b = (5, 10, 0)</p>
+
+  <h2>Passo 2 — encontrar A⁻¹ (Gauss-Jordan em [A | I])</h2>
+
+  <div class="step">
+    <div class="label">Matriz aumentada</div>
+    <table class="matrix">
+      <tr><td>1</td><td>1</td><td>1</td><td class="sep">1</td><td>0</td><td>0</td></tr>
+      <tr><td>1</td><td>1</td><td>−4</td><td class="sep">0</td><td>1</td><td>0</td></tr>
+      <tr><td>−4</td><td>1</td><td>1</td><td class="sep">0</td><td>0</td><td>1</td></tr>
+    </table>
+  </div>
+
+  <div class="step">
+    <div class="label">L2 ← L2 − L1,&nbsp; L3 ← L3 + 4L1</div>
+    <table class="matrix pivoted">
+      <tr><td class="pivot">1</td><td>1</td><td>1</td><td class="sep">1</td><td>0</td><td>0</td></tr>
+      <tr><td>0</td><td>0</td><td>−5</td><td class="sep">−1</td><td>1</td><td>0</td></tr>
+      <tr><td>0</td><td>5</td><td>5</td><td class="sep">4</td><td>0</td><td>1</td></tr>
+    </table>
+  </div>
+
+  <div class="step">
+    <div class="label">Troco L2 ↔ L3</div>
+    <p class="note">A linha 2 ficou com zero na coluna do pivô que eu preciso — troco pela linha 3, que já tem uma entrada não-nula ali.</p>
+    <table class="matrix pivoted">
+      <tr><td>1</td><td>1</td><td>1</td><td class="sep">1</td><td>0</td><td>0</td></tr>
+      <tr><td class="pivot">0</td><td>5</td><td>5</td><td class="sep">4</td><td>0</td><td>1</td></tr>
+      <tr><td>0</td><td>0</td><td>−5</td><td class="sep">−1</td><td>1</td><td>0</td></tr>
+    </table>
+  </div>
+
+  <div class="step">
+    <div class="label">L2 ← L2 / 5,&nbsp; L3 ← L3 / (−5)</div>
+    <table class="matrix pivoted">
+      <tr><td>1</td><td>1</td><td>1</td><td class="sep">1</td><td>0</td><td>0</td></tr>
+      <tr><td>0</td><td class="pivot">1</td><td>1</td><td class="sep">4/5</td><td>0</td><td>1/5</td></tr>
+      <tr><td>0</td><td>0</td><td class="pivot">1</td><td class="sep">1/5</td><td>−1/5</td><td>0</td></tr>
+    </table>
+  </div>
+
+  <div class="step">
+    <div class="label">L1 ← L1 − L3,&nbsp; L2 ← L2 − L3</div>
+    <p class="note">Elimino a coluna 3 acima do pivô da linha 3.</p>
+    <table class="matrix pivoted">
+      <tr><td class="pivot">1</td><td>1</td><td>0</td><td class="sep">4/5</td><td>1/5</td><td>0</td></tr>
+      <tr><td>0</td><td class="pivot">1</td><td>0</td><td class="sep">3/5</td><td>1/5</td><td>1/5</td></tr>
+      <tr><td>0</td><td>0</td><td>1</td><td class="sep">1/5</td><td>−1/5</td><td>0</td></tr>
+    </table>
+  </div>
+
+  <div class="step">
+    <div class="label">L1 ← L1 − L2</div>
+    <table class="matrix pivoted">
+      <tr><td class="pivot">1</td><td>0</td><td>0</td><td class="sep">1/5</td><td>0</td><td>−1/5</td></tr>
+      <tr><td>0</td><td class="pivot">1</td><td>0</td><td class="sep">3/5</td><td>1/5</td><td>1/5</td></tr>
+      <tr><td>0</td><td>0</td><td class="pivot">1</td><td class="sep">1/5</td><td>−1/5</td><td>0</td></tr>
+    </table>
+  </div>
+
+  <div class="answer-box">
+    A⁻¹ =
+    <table class="matrix" style="background:transparent;border:none;margin-top:8px;">
+      <tr><td>1/5</td><td>0</td><td>−1/5</td></tr>
+      <tr><td>3/5</td><td>1/5</td><td>1/5</td></tr>
+      <tr><td>1/5</td><td>−1/5</td><td>0</td></tr>
+    </table>
+  </div>
+
+  <h2>Passo 3 — calcular x = A⁻¹b</h2>
+  <p>Com b = (5, 10, 0):</p>
+  <ul>
+    <li>x = (1/5)(5) + (0)(10) + (−1/5)(0) = 1 + 0 + 0 = 1</li>
+    <li>y = (3/5)(5) + (1/5)(10) + (1/5)(0) = 3 + 2 + 0 = 5</li>
+    <li>z = (1/5)(5) + (−1/5)(10) + (0)(0) = 1 − 2 + 0 = −1</li>
+  </ul>
+
+  <h2>Resultado</h2>
+  <div class="answer-box">
+    x = 1, &nbsp; y = 5, &nbsp; z = −1
+  </div>
+
+  <h2>Verificação</h2>
+  <ul>
+    <li>Eq. 1: 1 + 5 + (−1) = 5 ✓</li>
+    <li>Eq. 2: 1 + 5 − 4(−1) = 1+5+4 = 10 ✓</li>
+    <li>Eq. 3: −4(1) + 5 + (−1) = −4+5−1 = 0 ✓</li>
+  </ul>
+
+  <h2>Conferência com o gabarito do livro</h2>
+  <p>Resposta oficial (Anton/Rorres, Respostas dos Exercícios, seção 1.6, exercício 5):</p>
+  <div class="book-quote">x = 1, y = 5, z = 1</div>
+  <p class="note">Mesmo caso da questão 3: a extração de texto do PDF costuma comer o sinal de menos (já vimos isso antes). x e y batem direto; o "z = 1" do gabarito perdeu o sinal — a verificação acima nas 3 equações originais confirma que só <code>z = −1</code> fecha a conta, então essa é a resposta correta.</p>
+
+  <footer>
+    Álgebra Linear com Aplicações, 10ª edição — Howard Anton &amp; Chris Rorres. Conjunto de exercícios 1.6 (Mais sobre sistemas lineares e matrizes invertíveis), página 65. Gabarito na p. 724 do PDF (texto).
+  </footer>
+</main>
+</body>
+</html>
