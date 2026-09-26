@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Eliminação Gaussiana vs. Gauss-Jordan</title>
+<style>
+  :root {
+    --bg: #ffffff; --fg: #1a1a1a; --muted: #5a5a5a; --accent: #1d4ed8; --accent2: #b45309;
+    --border: #d9dee6; --panel: #f6f8fb; --pivot: #dbeafe; --pivot2: #fde8c8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14171c; --fg: #e8eaed; --muted: #9aa4b2; --accent: #6ea8fe; --accent2: #f0b862;
+      --border: #2b3038; --panel: #1b1f26; --pivot: #24344d; --pivot2: #4a3620;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; padding:32px 16px 64px; background:var(--bg); color:var(--fg);
+    font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; line-height:1.55; }
+  main { max-width:920px; margin:0 auto; }
+  h1 { font-size:1.5rem; margin-bottom:4px; }
+  .subtitle { color:var(--muted); font-size:0.95rem; margin-bottom:28px; }
+  h2 { font-size:1.15rem; margin-top:40px; margin-bottom:12px; border-bottom:1px solid var(--border); padding-bottom:6px; }
+  .system { font-family:"Cambria Math",Cambria,Georgia,serif; font-size:1.05rem; background:var(--panel);
+    border:1px solid var(--border); border-radius:8px; padding:16px 20px; display:inline-block; }
+  .system div { white-space:nowrap; }
+  table.matrix {
+    border-collapse:collapse; font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;
+    font-size:0.92rem; background:var(--panel); border-radius:6px; overflow:hidden;
+  }
+  table.matrix td { padding:5px 9px; text-align:right; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+  table.matrix tr td:first-child { border-left:2px solid var(--fg); }
+  table.matrix tr td.sep { border-left:1px dashed var(--border); }
+  table.matrix tr td:last-child { border-right:2px solid var(--fg); }
+  td.pivot { background:var(--pivot); font-weight:700; border-radius:4px; }
+  td.pivot2 { background:var(--pivot2); font-weight:700; border-radius:4px; }
+  .cols { display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:16px; }
+  @media (max-width:680px) { .cols { grid-template-columns:1fr; } }
+  .col { border:1px solid var(--border); border-radius:10px; padding:16px; background:var(--panel); }
+  .col.gauss { border-top:4px solid var(--accent); }
+  .col.jordan { border-top:4px solid var(--accent2); }
+  .col h3 { margin-top:0; font-size:1rem; }
+  .col h3.gauss-title { color:var(--accent); }
+  .col h3.jordan-title { color:var(--accent2); }
+  .step { margin:14px 0; }
+  .step .label { font-weight:600; font-size:0.85rem; margin-bottom:4px; }
+  .note { color:var(--muted); font-size:0.88rem; margin-top:6px; }
+  .answer-box { background:var(--panel); border:1px solid var(--accent); border-radius:8px; padding:16px 20px; font-size:1.05rem; }
+  .book-quote { border-left:3px solid var(--accent); padding:10px 16px; background:var(--panel); border-radius:0 6px 6px 0; }
+  ul, ol { padding-left:22px; }
+  code { font-family:"SFMono-Regular",Consolas,monospace; background:var(--panel); padding:1px 5px; border-radius:4px; }
+  table.compare { width:100%; border-collapse:collapse; margin-top:12px; font-size:0.92rem; }
+  table.compare th, table.compare td { text-align:left; padding:8px 12px; border-bottom:1px solid var(--border); vertical-align:top; }
+  table.compare th { color:var(--muted); font-weight:600; font-size:0.85rem; text-transform:uppercase; letter-spacing:0.02em; }
+  footer { margin-top:48px; color:var(--muted); font-size:0.82rem; border-top:1px solid var(--border); padding-top:12px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Eliminação Gaussiana × Eliminação de Gauss-Jordan</h1>
+  <div class="subtitle">Comparação lado a lado, usando o mesmo sistema (o das questões 5 e 9 do livro)</div>
+
+  <h2>A ideia em uma frase</h2>
+  <p><strong>Forma escalonada</strong> é só o "formato de escada" que a matriz vai tomando durante a eliminação — não é um método, é um estado que a matriz atinge no meio do caminho. Os dois métodos abaixo passam por essa forma, mas um <em>para</em> nela e o outro <em>continua</em>:</p>
+  <ul>
+    <li><strong>Eliminação gaussiana</strong>: zera só <em>abaixo</em> da diagonal (fase direta), até virar uma matriz triangular — visualmente é como um triângulo/trapézio, com zeros só no canto inferior esquerdo. Depois resolve de baixo pra cima por <strong>substituição regressiva</strong>.</li>
+    <li><strong>Eliminação de Gauss-Jordan</strong>: continua depois disso, zerando também <em>acima</em> da diagonal e forçando cada pivô a ser exatamente 1 (fase inversa). No final sobra só a "linha" da diagonal com 1's, cercada de zeros — a resposta já sai pronta na última coluna, sem precisar substituir nada.</li>
+  </ul>
+
+  <h2>O sistema usado no exemplo</h2>
+  <div class="system">
+    <div>&nbsp;x&#8321; + &nbsp;x&#8322; + 2x&#8323; = &nbsp;8</div>
+    <div>−x&#8321; − 2x&#8322; + 3x&#8323; = &nbsp;1</div>
+    <div>3x&#8321; − 7x&#8322; + 4x&#8323; = 10</div>
+  </div>
+
+  <h2>Lado a lado</h2>
+  <div class="cols">
+    <div class="col gauss">
+      <h3 class="gauss-title">Eliminação Gaussiana</h3>
+      <div class="step">
+        <div class="label">Matriz aumentada</div>
+        <table class="matrix">
+          <tr><td>1</td><td>1</td><td>2</td><td class="sep">8</td></tr>
+          <tr><td>−1</td><td>−2</td><td>3</td><td class="sep">1</td></tr>
+          <tr><td>3</td><td>−7</td><td>4</td><td class="sep">10</td></tr>
+        </table>
+      </div>
+      <div class="step">
+        <div class="label">L2 ← L2+L1,&nbsp; L3 ← L3−3L1 (zera só abaixo)</div>
+        <table class="matrix">
+          <tr><td class="pivot">1</td><td>1</td><td>2</td><td class="sep">8</td></tr>
+          <tr><td>0</td><td>−1</td><td>5</td><td class="sep">9</td></tr>
+          <tr><td>0</td><td>−10</td><td>−2</td><td class="sep">−14</td></tr>
+        </table>
+      </div>
+      <div class="step">
+        <div class="label">L3 ← L3 − 10L2</div>
+        <table class="matrix">
+          <tr><td>1</td><td>1</td><td>2</td><td class="sep">8</td></tr>
+          <tr><td class="pivot">0</td><td>−1</td><td>5</td><td class="sep">9</td></tr>
+          <tr><td>0</td><td>0</td><td>−52</td><td class="sep">−104</td></tr>
+        </table>
+        <p class="note"><strong>Parou aqui</strong> — forma escalonada (triangular). Não normaliza pivôs, não zera acima.</p>
+      </div>
+      <div class="step">
+        <div class="label">Substituição regressiva (de baixo pra cima)</div>
+        <p class="note">−52x&#8323;=−104 → x&#8323;=2<br>−x&#8322;+5(2)=9 → x&#8322;=1<br>x&#8321;+1+2(2)=8 → x&#8321;=3</p>
+      </div>
+      <p class="note">3 operações de eliminação + 3 substituições manuais no final.</p>
+    </div>
+
+    <div class="col jordan">
+      <h3 class="jordan-title">Eliminação de Gauss-Jordan</h3>
+      <div class="step">
+        <div class="label">Mesma matriz aumentada</div>
+        <table class="matrix">
+          <tr><td>1</td><td>1</td><td>2</td><td class="sep">8</td></tr>
+          <tr><td>−1</td><td>−2</td><td>3</td><td class="sep">1</td></tr>
+          <tr><td>3</td><td>−7</td><td>4</td><td class="sep">10</td></tr>
+        </table>
+      </div>
+      <div class="step">
+        <div class="label">Mesmos passos iniciais (fase direta é idêntica)</div>
+        <table class="matrix">
+          <tr><td>1</td><td>1</td><td>2</td><td class="sep">8</td></tr>
+          <tr><td>0</td><td>−1</td><td>5</td><td class="sep">9</td></tr>
+          <tr><td>0</td><td>0</td><td>−52</td><td class="sep">−104</td></tr>
+        </table>
+      </div>
+      <div class="step">
+        <div class="label">Continua: normaliza todos os pivôs para 1</div>
+        <table class="matrix">
+          <tr><td class="pivot2">1</td><td>1</td><td>2</td><td class="sep">8</td></tr>
+          <tr><td>0</td><td class="pivot2">1</td><td>−5</td><td class="sep">−9</td></tr>
+          <tr><td>0</td><td>0</td><td class="pivot2">1</td><td class="sep">2</td></tr>
+        </table>
+      </div>
+      <div class="step">
+        <div class="label">... e zera acima de cada pivô também (fase inversa)</div>
+        <table class="matrix">
+          <tr><td class="pivot2">1</td><td>0</td><td>0</td><td class="sep">3</td></tr>
+          <tr><td>0</td><td class="pivot2">1</td><td>0</td><td class="sep">1</td></tr>
+          <tr><td>0</td><td>0</td><td class="pivot2">1</td><td class="sep">2</td></tr>
+        </table>
+        <p class="note"><strong>Continuou até aqui</strong> — forma reduzida (RREF). A resposta já está pronta, direto na última coluna.</p>
+      </div>
+      <div class="step">
+        <div class="label">Leitura direta, sem substituição</div>
+        <p class="note">x&#8321;=3, x&#8322;=1, x&#8323;=2 — já é a linha inteira, não precisa calcular mais nada.</p>
+      </div>
+      <p class="note">Mais passos de eliminação (normalizar + zerar pra cima), mas zero substituições no final.</p>
+    </div>
+  </div>
+
+  <div class="answer-box" style="margin-top:20px;">
+    Os dois chegam no <strong>mesmo resultado</strong>: x&#8321;=3, x&#8322;=1, x&#8323;=2. A diferença é só o caminho.
+  </div>
+
+  <h2>Tabela-resumo</h2>
+  <table class="compare">
+    <tr><th></th><th>Eliminação Gaussiana</th><th>Eliminação de Gauss-Jordan</th></tr>
+    <tr><td>Onde para</td><td>Forma escalonada (triangular)</td><td>Forma escalonada <strong>reduzida</strong> (diagonal de 1's)</td></tr>
+    <tr><td>Zera acima da diagonal?</td><td>Não</td><td>Sim</td></tr>
+    <tr><td>Pivôs viram 1?</td><td>Não precisa</td><td>Sim, sempre</td></tr>
+    <tr><td>Como termina de resolver</td><td>Substituição regressiva (de baixo pra cima)</td><td>Não precisa — resposta já sai pronta</td></tr>
+    <tr><td>Quantidade de operações</td><td>Menor</td><td>Cerca de 50% a mais (para sistemas grandes)</td></tr>
+    <tr><td>Onde é mais usada</td><td>Na prática, em quase todo software (mais eficiente)</td><td>Em sala de aula / à mão (mais direta de acompanhar)</td></tr>
+  </table>
+  <p class="note">O livro (Anton &amp; Rorres) comenta exatamente esse ponto: "para sistemas lineares grandes, a eliminação de Gauss-Jordan envolve aproximadamente 50% mais operações do que a eliminação gaussiana; por isso, a maioria dos algoritmos de computador tem por base a eliminação gaussiana."</p>
+
+  <h2>Fechando com as suas próprias palavras</h2>
+  <ul>
+    <li><strong>"o escalonamento é o geral, é quando vc vai fazendo a escada"</strong> — correto: é o formato intermediário comum aos dois métodos, o "degrau" que a matriz forma conforme os pivôs vão surgindo mais à direita a cada linha.</li>
+    <li><strong>"a eliminação gaussiana é o trapézio invertido"</strong> — boa imagem: a matriz vira triangular, com zeros só no canto inferior esquerdo (como um triângulo/trapézio de números "escorrendo" pra baixo).</li>
+    <li><strong>"o Gauss-Jordan é deixar só a linha"</strong> — é isso: sobra só a diagonal de 1's (uma "linha" de pivôs), com zero em volta dela dos dois lados — a matriz identidade colada na resposta.</li>
+  </ul>
+
+  <footer>
+    Baseado no sistema das questões 5 (Gauss-Jordan) e 9 (Eliminação Gaussiana) do Conjunto de exercícios 1.2, Anton &amp; Rorres — Álgebra Linear com Aplicações, 10ª edição, página 23.
+  </footer>
+</main>
+</body>
+</html>
