@@ -11,4 +11,4 @@ ______________________________________________________________________
 
 ## Agent
 Um agente é qualquer coisa que pode ver o seu ambiente a partir de sensores e agir sobre ele.
-Um agente humano tem olhos, ouvidos e boca. Um robo agente tem a network, arquivos, input humano, e age sobre o ambiente escrevendo arquivos, enviando pacotes pela rede, etc
+Um agente humano tem olhos, ouvidos e boca. Um robo agente tem a network, arquivos, input humano, e age sobre o ambiente escrevendo arquivos, enviando pacotes pela rede, etc;
